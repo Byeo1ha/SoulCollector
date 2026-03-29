@@ -16,7 +16,7 @@ public class TurretPlacementController : MonoBehaviour
         
         if (Input.GetMouseButtonDown(0))
         {
-            
+            TryBuild();
         }
 
         if (Input.GetMouseButtonDown(1))

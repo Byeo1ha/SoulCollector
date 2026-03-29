@@ -4,13 +4,14 @@ using UnityEngine;
 public class TurretPool : MonoBehaviour
 {
     [SerializeField] private GameObject turretPrefab;
+    [SerializeField] private int maxTurrets = 10;
     
-    [SerializeField] private List<GameObject> pool =  new List<GameObject>();
+    private readonly List<GameObject> pool =  new List<GameObject>();
 
     //오브젝트 풀링을 위한 Prefab 제작
     private void Awake()
     {
-        for (int i = 0; i < pool.Count; i++)
+        for (int i = 0; i < maxTurrets; i++)
         {
             GameObject obj = Instantiate(turretPrefab, transform);
             obj.SetActive(false);
