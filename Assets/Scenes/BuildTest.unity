@@ -291,6 +291,8 @@ MonoBehaviour:
   buildZoneLayer:
     serializedVersion: 2
     m_Bits: 64
+  cellSize: 1
+  gridOrign: {x: 0, y: 0}
   isBuild: 0
 --- !u!4 &621172732
 Transform:

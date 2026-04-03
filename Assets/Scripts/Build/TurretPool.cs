@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class TurretPool : MonoBehaviour
 {
+    [Header("터렛")]
     [SerializeField] private GameObject turretPrefab;
     [SerializeField] private int maxTurrets = 10;
     
     private readonly List<GameObject> pool =  new List<GameObject>();
 
-    //오브젝트 풀링을 위한 Prefab 제작
     private void Awake()
     {
         for (int i = 0; i < maxTurrets; i++)
