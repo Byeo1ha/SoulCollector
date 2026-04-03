@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class TurretPlacementController : MonoBehaviour
 {
@@ -10,19 +11,10 @@ public class TurretPlacementController : MonoBehaviour
     //추후 인스펙터 노출 X
     [SerializeField] private bool isBuild = false;
 
-    private void Update()
+    private void Awake()
     {
-        if(!isBuild) return;
-        
-        if (Input.GetMouseButtonDown(0))
-        {
-            TryBuild();
-        }
-
-        if (Input.GetMouseButtonDown(1))
-        {
-            
-        }
+        InputManager.instance.onLeftClick += TryBuild;
+        InputManager.instance.debugKey += BuildOn;
     }
     
     public void BuildOn()
@@ -37,7 +29,10 @@ public class TurretPlacementController : MonoBehaviour
 
     private void TryBuild()
     {
-        Vector3 mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
+        Debug.Log("좌클릭 수신 완료!");
+        if(!isBuild) return;
+
+        Vector3 mousePos = mainCam.ScreenToWorldPoint(InputManager.instance.mouseVec);
         mousePos.z = 0;
 
         Vector2 point = mousePos;
