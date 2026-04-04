@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BulletBeam : MonoBehaviour
+public class Bullet : MonoBehaviour
 {
     [SerializeField] private Transform _target;
     [SerializeField] private float _shootingSpeed;

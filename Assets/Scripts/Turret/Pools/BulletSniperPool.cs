@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletPool : MonoBehaviour
+public class BulletSniperPool : MonoBehaviour
 {
     [Header("총알")]
-    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private GameObject bulletSniperPrefab;
     [SerializeField] private int maxBullets = 10;
     
     private readonly List<GameObject> pool =  new List<GameObject>();
@@ -13,7 +13,7 @@ public class BulletPool : MonoBehaviour
     {
         for (int i = 0; i < maxBullets; i++)
         {
-            GameObject obj = Instantiate(bulletPrefab, transform);
+            GameObject obj = Instantiate(bulletSniperPrefab, transform);
             obj.SetActive(false);
             pool.Add(obj);
         }
