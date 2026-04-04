@@ -27,10 +27,7 @@ public class InputManager : MonoBehaviour
 
     public void OnLeftClick(InputAction.CallbackContext context)
     {
-        if(context.performed) {
-            Debug.Log("좌클릭 수신 중!");
-            onLeftClick?.Invoke();
-        }
+        if(context.performed) onLeftClick?.Invoke();
     }
 
     public void OnPointerPosition(InputAction.CallbackContext context)
