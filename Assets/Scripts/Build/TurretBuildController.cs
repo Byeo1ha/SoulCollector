@@ -1,30 +1,26 @@
 using UnityEngine;
 
-public class TurretPlacementController : MonoBehaviour
+public class TurretBuildController : MonoBehaviour
 {
     [Header("메인 카메라")]
     [SerializeField] private Camera mainCam;
 
     [Header("터렛")]
     [SerializeField] private TurretPool turretPool;
-    [SerializeField] private LayerMask buildZoneLayer;
-    [SerializeField] private LayerMask turretLayer;
-
-    [Header("설치 좌표 보정")]
-    [SerializeField] private float cellSize = 1f;
-    [SerializeField] private Vector2 gridOrign = Vector2.zero;
+    [SerializeField] private TurretValidator turretValidator;
+    [SerializeField] private GridSnapper gridSnapper;
     
     //추후 인스펙터 노출 X
     [SerializeField] private bool isBuild = false;
 
 #if UNITY_EDITOR
-[ContextMenu("Auto Assign")]
-private void AutoAssign()
+    [ContextMenu("Auto Assign")]
+    private void AutoAssign()
     {
         mainCam = GameObject.Find("Main Camera").GetComponent<Camera>();
-        turretPool = GameObject.Find("Build Manager").GetComponent<TurretPool>();
-        buildZoneLayer = LayerMask.GetMask("BuildZone");
-        turretLayer = LayerMask.GetMask("Turret");
+        turretPool = GetComponent<TurretPool>();
+        turretValidator = GetComponent<TurretValidator>();
+        gridSnapper = GetComponent<GridSnapper>();
     }
 #endif
 
@@ -70,13 +66,13 @@ private void AutoAssign()
 
         Vector2 point = mousePos;
 
-        if (!CanBuildZone(point))
+        if (!turretValidator.CanBuildZone(point))
         {
             Debug.Log("Can't Build this Area");
             return;
         }
 
-        if (HasTurret(point))
+        if (turretValidator.HasTurret(point))
         {
             Debug.Log("Already Built");
             return;
@@ -90,26 +86,11 @@ private void AutoAssign()
             return;
         }
 
-        turret.transform.position = GetSnappedPosition(mousePos);
+        turret.transform.position = gridSnapper.GetSnappedPosition(mousePos);
         turret.SetActive(true);
     }
 
-    private bool CanBuildZone(Vector2 vec)
-    {
-        Collider2D hit = Physics2D.OverlapPoint(vec, buildZoneLayer);
-        return hit != null;
-    }
+    
 
-    private bool HasTurret(Vector2 vec)
-    {
-        Collider2D hit = Physics2D.OverlapPoint(vec, turretLayer);
-        return hit != null;
-    }
-
-    private Vector3 GetSnappedPosition(Vector3 vec)
-    {
-        float x = Mathf.Floor((vec.x - gridOrign.x) / cellSize) * cellSize + gridOrign.x + cellSize * 0.5f;
-        float y = Mathf.Floor((vec.y - gridOrign.y) / cellSize) * cellSize + gridOrign.y + cellSize * 0.5f;
-        return new Vector3(x, y, 0f);
-    }
+    
 }

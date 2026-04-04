@@ -40,6 +40,6 @@ public class InputManager : MonoBehaviour
 
     public void DebugKey(InputAction.CallbackContext context)
     {
-        if(context.performed) debugKey.Invoke();
+        if(context.performed) debugKey?.Invoke();
     }
 }
