@@ -8,6 +8,7 @@ public class TurretPlacementController : MonoBehaviour
     [Header("터렛")]
     [SerializeField] private TurretPool turretPool;
     [SerializeField] private LayerMask buildZoneLayer;
+    [SerializeField] private LayerMask turretLayer;
 
     [Header("설치 좌표 보정")]
     [SerializeField] private float cellSize = 1f;
@@ -23,6 +24,7 @@ private void AutoAssign()
         mainCam = GameObject.Find("Main Camera").GetComponent<Camera>();
         turretPool = GameObject.Find("Build Manager").GetComponent<TurretPool>();
         buildZoneLayer = LayerMask.GetMask("BuildZone");
+        turretLayer = LayerMask.GetMask("Turret");
     }
 #endif
 
@@ -34,13 +36,18 @@ private void AutoAssign()
     private void OnEnable()
     {
         InputManager.instance.onLeftClick += TryBuild;
-        InputManager.instance.debugKey += BuildOn;
+        InputManager.instance.debugKey += BuildToggle;
     }
 
     private void OnDisable()
     {
         InputManager.instance.onLeftClick -= TryBuild;
-        InputManager.instance.debugKey -= BuildOn;
+        InputManager.instance.debugKey -= BuildToggle;
+    }
+
+    public void BuildToggle()
+    {
+        isBuild = !isBuild;
     }
     
     public void BuildOn()
@@ -53,9 +60,9 @@ private void AutoAssign()
         isBuild = false;
     }
 
+    //터렛 설치
     private void TryBuild()
     {
-        Debug.Log("좌클릭 수신 완료!");
         if(!isBuild) return;
 
         Vector3 mousePos = mainCam.ScreenToWorldPoint(InputManager.instance.mouseVec);
@@ -66,6 +73,12 @@ private void AutoAssign()
         if (!CanBuildZone(point))
         {
             Debug.Log("Can't Build this Area");
+            return;
+        }
+
+        if (HasTurret(point))
+        {
+            Debug.Log("Already Built");
             return;
         }
         
@@ -79,13 +92,17 @@ private void AutoAssign()
 
         turret.transform.position = GetSnappedPosition(mousePos);
         turret.SetActive(true);
-
-        isBuild = false;
     }
 
     private bool CanBuildZone(Vector2 vec)
     {
         Collider2D hit = Physics2D.OverlapPoint(vec, buildZoneLayer);
+        return hit != null;
+    }
+
+    private bool HasTurret(Vector2 vec)
+    {
+        Collider2D hit = Physics2D.OverlapPoint(vec, turretLayer);
         return hit != null;
     }
 
