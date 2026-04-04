@@ -28,8 +28,19 @@ private void AutoAssign()
 
     private void Awake()
     {
+        
+    }
+
+    private void OnEnable()
+    {
         InputManager.instance.onLeftClick += TryBuild;
         InputManager.instance.debugKey += BuildOn;
+    }
+
+    private void OnDisable()
+    {
+        InputManager.instance.onLeftClick -= TryBuild;
+        InputManager.instance.debugKey -= BuildOn;
     }
     
     public void BuildOn()
