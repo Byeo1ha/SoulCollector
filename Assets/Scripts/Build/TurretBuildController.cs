@@ -2,31 +2,32 @@ using UnityEngine;
 
 public class TurretBuildController : MonoBehaviour
 {
+    private TurretPool turretPool;
+    private TurretValidator turretValidator;
+    private GridSnapper gridSnapper;
+    private TurretBuildGuide turretBuildGuide;
+
     [Header("메인 카메라")]
     [SerializeField] private Camera mainCam;
 
-    [Header("터렛")]
-    [SerializeField] private TurretPool turretPool;
-    [SerializeField] private TurretValidator turretValidator;
-    [SerializeField] private GridSnapper gridSnapper;
-    
     //추후 인스펙터 노출 X
-    [SerializeField] private bool isBuild = false;
+    [SerializeField] private bool _isBuild = false;
+    public bool isBuild => _isBuild;
 
 #if UNITY_EDITOR
     [ContextMenu("Auto Assign")]
     private void AutoAssign()
     {
-        mainCam = GameObject.Find("Main Camera").GetComponent<Camera>();
-        turretPool = GetComponent<TurretPool>();
-        turretValidator = GetComponent<TurretValidator>();
-        gridSnapper = GetComponent<GridSnapper>();
+        mainCam = GameObject.Find("Main Camera").GetComponent<Camera>();  
     }
 #endif
 
     private void Awake()
     {
-        
+        turretPool = GetComponent<TurretPool>();
+        turretValidator = GetComponent<TurretValidator>();
+        gridSnapper = GetComponent<GridSnapper>();
+        turretBuildGuide = GetComponent<TurretBuildGuide>();
     }
 
     private void OnEnable()
@@ -43,23 +44,24 @@ public class TurretBuildController : MonoBehaviour
 
     public void BuildToggle()
     {
-        isBuild = !isBuild;
+        _isBuild = !_isBuild;
+        turretBuildGuide.SetBuildGuideSprite(_isBuild);
     }
     
     public void BuildOn()
     {
-        isBuild = true;
+        _isBuild = true;
     }
 
     public void BuildOff()
     {
-        isBuild = false;
+        _isBuild = false;
     }
 
     //터렛 설치
     private void TryBuild()
     {
-        if(!isBuild) return;
+        if(!_isBuild) return;
 
         Vector3 mousePos = mainCam.ScreenToWorldPoint(InputManager.instance.mouseVec);
         mousePos.z = 0;
