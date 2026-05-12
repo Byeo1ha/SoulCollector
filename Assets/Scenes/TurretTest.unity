@@ -206,7 +206,7 @@ Transform:
   m_GameObject: {fileID: 209055987}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.49, y: 0, z: 0}
+  m_LocalPosition: {x: 1.75, y: 0.12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -285,6 +285,67 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1001 &1442629186
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1745743543771814472, guid: d1abdfc523c553a4b870d37a130e41b7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 1745743543771814472, guid: d1abdfc523c553a4b870d37a130e41b7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 1745743543771814472, guid: d1abdfc523c553a4b870d37a130e41b7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1745743543771814472, guid: d1abdfc523c553a4b870d37a130e41b7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1745743543771814472, guid: d1abdfc523c553a4b870d37a130e41b7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1745743543771814472, guid: d1abdfc523c553a4b870d37a130e41b7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1745743543771814472, guid: d1abdfc523c553a4b870d37a130e41b7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1745743543771814472, guid: d1abdfc523c553a4b870d37a130e41b7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1745743543771814472, guid: d1abdfc523c553a4b870d37a130e41b7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1745743543771814472, guid: d1abdfc523c553a4b870d37a130e41b7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1943087206714996768, guid: d1abdfc523c553a4b870d37a130e41b7, type: 3}
+      propertyPath: m_Name
+      value: Beam Tower 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5316247920378358075, guid: d1abdfc523c553a4b870d37a130e41b7, type: 3}
+      propertyPath: bulletBeamPool
+      value: 
+      objectReference: {fileID: 1560255293}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d1abdfc523c553a4b870d37a130e41b7, type: 3}
 --- !u!1 &1560255292
 GameObject:
   m_ObjectHideFlags: 0
@@ -508,7 +569,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 785132279949568795, guid: 834c2f5cf4dcd8e49b736987c431f3e4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.56
+      value: -3.52
       objectReference: {fileID: 0}
     - target: {fileID: 785132279949568795, guid: 834c2f5cf4dcd8e49b736987c431f3e4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -569,7 +630,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1745743543771814472, guid: d1abdfc523c553a4b870d37a130e41b7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -7.08
       objectReference: {fileID: 0}
     - target: {fileID: 1745743543771814472, guid: d1abdfc523c553a4b870d37a130e41b7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -609,7 +670,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1943087206714996768, guid: d1abdfc523c553a4b870d37a130e41b7, type: 3}
       propertyPath: m_Name
-      value: Beam Tower
+      value: Beam Tower 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5316247920378358075, guid: d1abdfc523c553a4b870d37a130e41b7, type: 3}
+      propertyPath: isFind
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5316247920378358075, guid: d1abdfc523c553a4b870d37a130e41b7, type: 3}
       propertyPath: bulletBeamPool
@@ -642,7 +707,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8506450277118416674, guid: 7ec963294e6401c4182ab299a03a02f5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.56
+      value: -3.52
       objectReference: {fileID: 0}
     - target: {fileID: 8506450277118416674, guid: 7ec963294e6401c4182ab299a03a02f5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -691,6 +756,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 1805222050}
   - {fileID: 1792542019688233748}
+  - {fileID: 1442629186}
   - {fileID: 6217880855820624143}
   - {fileID: 1582413815267859171}
   - {fileID: 209055989}

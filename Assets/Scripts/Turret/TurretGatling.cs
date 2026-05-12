@@ -6,9 +6,9 @@ public class TurretGatling : TurretBase
     [SerializeField] private BulletGatlingPool bulletGatlingPool;
     [SerializeField] private Transform shootPoint;
 
-    [SerializeField] private bool isFind = false;
+    [SerializeField] private bool isFind;
 
-    private float _nextFireTime = 0f;
+    private float _nextFireTime;
 
     private void Update()
     {
