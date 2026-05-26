@@ -14,6 +14,8 @@ public class TurretBuildController : MonoBehaviour
     [SerializeField] private bool _isBuild = false;
     public bool isBuild => _isBuild;
 
+    [SerializeField] private TurretType turretType;
+
 #if UNITY_EDITOR
     [ContextMenu("Auto Assign")]
     private void AutoAssign()
@@ -32,14 +34,14 @@ public class TurretBuildController : MonoBehaviour
 
     private void OnEnable()
     {
-        InputManager.instance.onLeftClick += TryBuild;
-        InputManager.instance.debugKey += BuildToggle;
+        InputManager.Instance.onLeftClick += TryBuild;
+        InputManager.Instance.debugKey += BuildToggle;
     }
 
     private void OnDisable()
     {
-        InputManager.instance.onLeftClick -= TryBuild;
-        InputManager.instance.debugKey -= BuildToggle;
+        InputManager.Instance.onLeftClick -= TryBuild;
+        InputManager.Instance.debugKey -= BuildToggle;
     }
 
     public void BuildToggle()
@@ -47,15 +49,20 @@ public class TurretBuildController : MonoBehaviour
         _isBuild = !_isBuild;
         turretBuildGuide.SetBuildGuideSprite(_isBuild);
     }
-    
-    public void BuildOn()
+
+    public void SetTurretTypeBeam()
     {
-        _isBuild = true;
+        turretType = TurretType.Beam;
     }
 
-    public void BuildOff()
+    public void SetTurretTypeGatling()
     {
-        _isBuild = false;
+        turretType = TurretType.Gatling;
+    }
+
+    public void SetTurretTypeSniper()
+    {
+        turretType = TurretType.Sniper;
     }
 
     //터렛 설치
@@ -63,7 +70,7 @@ public class TurretBuildController : MonoBehaviour
     {
         if(!_isBuild) return;
 
-        Vector3 mousePos = mainCam.ScreenToWorldPoint(InputManager.instance.mouseVec);
+        Vector3 mousePos = mainCam.ScreenToWorldPoint(InputManager.Instance.mouseVec);
         mousePos.z = 0;
 
         Vector2 point = mousePos;
@@ -80,7 +87,23 @@ public class TurretBuildController : MonoBehaviour
             return;
         }
         
-        GameObject turret = turretPool.GetTurret();
+        GameObject turret = null;
+
+        switch (turretType)
+        {
+            case TurretType.Beam:
+                turret = turretPool.GetBeamTurret();
+                break;
+            case TurretType.Gatling:
+                turret = turretPool.GetGatlingTurret();
+                break;
+            case TurretType.Sniper:
+                turret = turretPool.GetSniperTurret();
+                break;
+            default:
+                turret = null;
+                return;
+        }
 
         if (turret == null)
         {
@@ -91,8 +114,4 @@ public class TurretBuildController : MonoBehaviour
         turret.transform.position = gridSnapper.GetSnappedPosition(mousePos);
         turret.SetActive(true);
     }
-
-    
-
-    
 }
