@@ -16,6 +16,7 @@ public class TurretBuildController : MonoBehaviour
     public bool isBuild => _isBuild;
 
     [SerializeField] private TurretType turretType;
+    public TurretType currentTurretType => turretType;
 
     private bool _isLeftClicked;
 
