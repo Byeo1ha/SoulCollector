@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class TurretBuildController : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class TurretBuildController : MonoBehaviour
     public bool isBuild => _isBuild;
 
     [SerializeField] private TurretType turretType;
+
+    private bool _isLeftClicked;
 
 #if UNITY_EDITOR
     [ContextMenu("Auto Assign")]
@@ -34,14 +37,27 @@ public class TurretBuildController : MonoBehaviour
 
     private void OnEnable()
     {
-        InputManager.Instance.onLeftClick += TryBuild;
+        InputManager.Instance.onLeftClick += OnLeftClick;
         InputManager.Instance.debugKey += BuildToggle;
     }
 
     private void OnDisable()
     {
-        InputManager.Instance.onLeftClick -= TryBuild;
+        InputManager.Instance.onLeftClick -= OnLeftClick;
         InputManager.Instance.debugKey -= BuildToggle;
+    }
+
+    private void Update()
+    {
+        if (!_isLeftClicked) return;
+
+        _isLeftClicked = false;
+        TryBuild();
+    }
+
+    private void OnLeftClick()
+    {
+        _isLeftClicked = true;
     }
 
     public void BuildToggle()
@@ -68,7 +84,8 @@ public class TurretBuildController : MonoBehaviour
     //터렛 설치
     private void TryBuild()
     {
-        if(!_isBuild) return;
+        if (EventSystem.current.IsPointerOverGameObject()) return;
+        if (!_isBuild) return;
 
         Vector3 mousePos = mainCam.ScreenToWorldPoint(InputManager.Instance.mouseVec);
         mousePos.z = 0;
