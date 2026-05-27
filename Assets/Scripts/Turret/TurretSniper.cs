@@ -8,6 +8,7 @@ public class TurretSniper : TurretBase
 
     [SerializeField] private bool isFind = false;
 
+    private Transform _currentTarget;
     private float _nextFireTime = 0f;
 
     private void Update()
@@ -17,11 +18,14 @@ public class TurretSniper : TurretBase
 
     private void TryAttack()
     {
-        Transform target = FindNearestTarget(transform.position, turretSniperData.attackRange);
+        if (!IsTargetValid(_currentTarget, transform.position, turretSniperData.attackRange))
+        {
+            _currentTarget = FindNearestTarget(transform.position, turretSniperData.attackRange);
+        }
 
-        if (target == null) return;
+        if (_currentTarget == null) return;
 
-        Attack(target);
+        Attack(_currentTarget);
     }
 
     private void Attack(Transform target)

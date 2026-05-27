@@ -4,6 +4,15 @@ public class TurretBase : MonoBehaviour
 {
     [SerializeField] protected LayerMask enemyLayer;
 
+    protected bool IsTargetValid(Transform target, Vector2 origin, float attackRanage)
+    {
+        if (target == null) return false;
+        if (!target.gameObject.activeInHierarchy) return false;
+
+        float distance = ((Vector2)target.position - origin).sqrMagnitude;
+        return distance <= attackRanage * attackRanage;
+    }
+
     protected virtual Transform FindNearestTarget(Vector2 origin, float attackRanage)
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(origin, attackRanage, enemyLayer);
