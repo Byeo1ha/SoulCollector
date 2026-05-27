@@ -7,18 +7,24 @@ public class TurretBuildBtn : MonoBehaviour
     public void OnTurretBeamBtn()
     {
         turretBuildController.SetTurretTypeBeam();
-        turretBuildController.BuildToggle();
+        BuildSwtiching();
     }
 
     public void OnTurretGatlingBtn()
     {
         turretBuildController.SetTurretTypeGatling();
-        turretBuildController.BuildToggle();
+        BuildSwtiching();
     }
 
     public void OnTurretSniperBtn()
     {
         turretBuildController.SetTurretTypeSniper();
+        BuildSwtiching();
+    }
+
+    private void BuildSwtiching()
+    {
+        if (!turretBuildController.isBuild)
         turretBuildController.BuildToggle();
     }
 }
