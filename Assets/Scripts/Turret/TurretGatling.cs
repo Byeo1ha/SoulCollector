@@ -18,10 +18,7 @@ public class TurretGatling : TurretBase
 
     private void TryAttack()
     {
-        if (!IsTargetValid(_currentTarget, transform.position, turretGatlingData.attackRange))
-        {
-            _currentTarget = FindNearestTarget(transform.position, turretGatlingData.attackRange);
-        }
+        _currentTarget = FindFirstTarget(transform.position, turretGatlingData.attackRange);
 
         if (_currentTarget == null) return;
 

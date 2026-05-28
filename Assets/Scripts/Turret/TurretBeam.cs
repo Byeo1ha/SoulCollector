@@ -18,10 +18,7 @@ public class TurretBeam : TurretBase
 
     private void TryAttack()
     {
-        if (!IsTargetValid(_currentTarget, transform.position, turretBeamData.attackRange))
-        {
-            _currentTarget = FindNearestTarget(transform.position, turretBeamData.attackRange);
-        }
+        _currentTarget = FindFirstTarget(transform.position, turretBeamData.attackRange);
 
         if (_currentTarget == null) return;
 

@@ -18,10 +18,7 @@ public class TurretSniper : TurretBase
 
     private void TryAttack()
     {
-        if (!IsTargetValid(_currentTarget, transform.position, turretSniperData.attackRange))
-        {
-            _currentTarget = FindNearestTarget(transform.position, turretSniperData.attackRange);
-        }
+        _currentTarget = FindFirstTarget(transform.position, turretSniperData.attackRange);
 
         if (_currentTarget == null) return;
 

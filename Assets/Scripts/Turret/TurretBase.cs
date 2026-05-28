@@ -1,8 +1,16 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TurretBase : MonoBehaviour
 {
     [SerializeField] protected LayerMask enemyLayer;
+
+    private readonly List<Transform> targetsInRange = new List<Transform>();
+
+    protected virtual void OnDisable()
+    {
+        targetsInRange.Clear();
+    }
 
     protected bool IsTargetValid(Transform target, Vector2 origin, float attackRanage)
     {
@@ -13,26 +21,30 @@ public class TurretBase : MonoBehaviour
         return distance <= attackRanage * attackRanage;
     }
 
-    protected virtual Transform FindNearestTarget(Vector2 origin, float attackRanage)
+    protected virtual Transform FindFirstTarget(Vector2 origin, float attackRanage)
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(origin, attackRanage, enemyLayer);
 
-        if (hits.Length == 0) return null;
-
-        Transform nearestTarget = null;
-        float nearestDistance = float.MaxValue;
-
         for (int i = 0; i < hits.Length; i++)
         {
-            float distance = ((Vector2)hits[i].transform.position - origin).sqrMagnitude;
-
-            if (distance < nearestDistance)
+            Transform target = hits[i].transform;
+            
+            if (!targetsInRange.Contains(target))
             {
-                nearestDistance = distance;
-                nearestTarget = hits[i].transform;
+                targetsInRange.Add(target);
             }
         }
-        
-        return nearestTarget;
+
+        for (int i = targetsInRange.Count - 1; i >= 0; i--)
+        {
+            if (!IsTargetValid(targetsInRange[i], origin, attackRanage))
+            {
+                targetsInRange.RemoveAt(i);
+            }
+        }
+
+        if (targetsInRange.Count == 0) return null;
+
+        return targetsInRange[0];
     }
 }
