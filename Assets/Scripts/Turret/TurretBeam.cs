@@ -8,8 +8,14 @@ public class TurretBeam : TurretBase
 
     [SerializeField] private bool isFind = false;
 
+    private TurretStat turretStat;
     private Transform _currentTarget;
     private float _nextFireTime = 0f;
+
+    private void Awake()
+    {
+        turretStat = turretBeamData.RuntimeStat;
+    }
 
     private void Update()
     {
@@ -18,7 +24,7 @@ public class TurretBeam : TurretBase
 
     private void TryAttack()
     {
-        _currentTarget = FindFirstTarget(transform.position, turretBeamData.attackRange);
+        _currentTarget = FindFirstTarget(transform.position, turretStat.attackRange);
 
         if (_currentTarget == null) return;
 
@@ -29,7 +35,7 @@ public class TurretBeam : TurretBase
     {
         if(Time.time < _nextFireTime) return;
 
-        _nextFireTime = Time.time + turretBeamData.cooldown;
+        _nextFireTime = Time.time + turretStat.cooldown;
         
         GameObject bullet = bulletBeamPool.GetBullet();
 
@@ -38,7 +44,7 @@ public class TurretBeam : TurretBase
         bullet.transform.position = shootPoint.position;
         
         Bullet bulletComponent = bullet.GetComponent<Bullet>();
-        bulletComponent.SetTarget(target, turretBeamData.shootingSpeed);
+        bulletComponent.SetTarget(target, turretStat.shootingSpeed);
 
         bullet.SetActive(true);
     }

@@ -1,12 +1,15 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "TurretBeamData", menuName = "Scriptable Objects/TurretBeamData")]
-public class TurretBeamData : ScriptableObject
+public class TurretBeamData : TurretData
 {
-    public int cost = 50;
-    public int attackDamage = 15;
-    
-    public float attackRange = 5f;
-    public float cooldown = 1f;
-    public float shootingSpeed = 3f;
+    private void Reset()
+    {
+        cost = 50;
+        attackDamage = 15;
+
+        attackRange = 5f;
+        cooldown = 1f;
+        shootingSpeed = 3f;
+    }
 }
