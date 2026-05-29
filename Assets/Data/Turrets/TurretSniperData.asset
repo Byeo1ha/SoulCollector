@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dff1f56e1fbe10e4a84ba5d32e6b1775, type: 3}
-  m_Name: BeamTurretAsset
-  m_EditorClassIdentifier: Assembly-CSharp::TurretBeamData
-  cost: 50
-  attackDamage: 15
-  attackRange: 5
-  cooldown: 1
-  shootingSpeed: 3
+  m_Script: {fileID: 11500000, guid: eaccefa5a7c7de440a617b631cf5be9a, type: 3}
+  m_Name: TurretSniperData
+  m_EditorClassIdentifier: Assembly-CSharp::TurretSniperData
+  cost: 150
+  attackDamage: 100
+  attackRange: 10
+  cooldown: 2.5
+  shootingSpeed: 10
