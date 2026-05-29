@@ -8,7 +8,14 @@ public class TurretSniper : TurretBase
 
     [SerializeField] private bool isFind = false;
 
+    private TurretStat turretStat;
+    private Transform _currentTarget;
     private float _nextFireTime = 0f;
+
+    private void Awake()
+    {
+        turretStat = turretSniperData.RuntimeStat;
+    }
 
     private void Update()
     {
@@ -17,18 +24,18 @@ public class TurretSniper : TurretBase
 
     private void TryAttack()
     {
-        Transform target = FindNearestTarget(transform.position, turretSniperData.attackRange);
+        _currentTarget = FindFirstTarget(transform.position, turretStat.attackRange);
 
-        if (target == null) return;
+        if (_currentTarget == null) return;
 
-        Attack(target);
+        Attack(_currentTarget);
     }
 
     private void Attack(Transform target)
     {
         if(Time.time < _nextFireTime) return;
 
-        _nextFireTime = Time.time + turretSniperData.cooldown;
+        _nextFireTime = Time.time + turretStat.cooldown;
         
         GameObject bullet = bulletSniperPool.GetBullet();
 
@@ -37,7 +44,7 @@ public class TurretSniper : TurretBase
         bullet.transform.position = shootPoint.position;
         
         Bullet bulletComponent = bullet.GetComponent<Bullet>();
-        bulletComponent.SetTarget(target, turretSniperData.shootingSpeed);
+        bulletComponent.SetTarget(target, turretStat.shootingSpeed);
 
         bullet.SetActive(true);
     }

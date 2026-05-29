@@ -19,7 +19,7 @@ public class TurretBuildGuide : MonoBehaviour
     {
         if(turretBuildController.isBuild)
         {
-            Vector3 mousePos = mainCam.ScreenToWorldPoint(InputManager.instance.mouseVec);
+            Vector3 mousePos = mainCam.ScreenToWorldPoint(InputManager.Instance.mouseVec);
             mousePos.z = 0;
             Vector3 point = gridSnapper.GetSnappedPosition(mousePos);
             buildGuideSprite.transform.position = point;

@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
-    public static InputManager instance;
+    public static InputManager Instance { get; private set; }
     public event Action onLeftClick;
     public event Action debugKey;
 
@@ -14,9 +14,9 @@ public class InputManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -37,6 +37,6 @@ public class InputManager : MonoBehaviour
 
     public void DebugKey(InputAction.CallbackContext context)
     {
-        if(context.performed) debugKey?.Invoke();
+        //if(context.performed) debugKey?.Invoke();
     }
 }
