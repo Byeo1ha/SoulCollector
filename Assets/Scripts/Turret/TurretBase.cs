@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurretBase : MonoBehaviour
+public abstract class TurretBase : MonoBehaviour
 {
     [SerializeField] protected LayerMask enemyLayer;
 
     private readonly List<Transform> targetsInRange = new List<Transform>();
+
+    protected abstract void TryAttack();
 
     protected virtual void OnDisable()
     {

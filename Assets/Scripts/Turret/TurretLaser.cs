@@ -1,17 +1,13 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class TurretProjectile : TurretBase
+public class TurretLaser : TurretBase
 {
     [SerializeField] private TurretData turretData;
-    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private LaserPool laserPool;
     [SerializeField] private Transform shootPoint;
-    [SerializeField] private int maxBullets = 10;
 
     [SerializeField] private bool isFind = true;
-
-    private readonly List<GameObject> bulletPool = new List<GameObject>();
 
     private TurretStat turretStat;
     private Transform _currentTarget;
@@ -21,7 +17,6 @@ public class TurretProjectile : TurretBase
     private void Awake()
     {
         turretStat = turretData.RuntimeStat;
-        CreateBulletPool();
     }
 
     private void Update()
@@ -34,16 +29,6 @@ public class TurretProjectile : TurretBase
         base.OnDisable();
         StopAllCoroutines();
         _isAttackWaiting = false;
-    }
-
-    private void CreateBulletPool()
-    {
-        for (int i = 0; i < maxBullets; i++)
-        {
-            GameObject bullet = Instantiate(bulletPrefab, transform);
-            bullet.SetActive(false);
-            bulletPool.Add(bullet);
-        }
     }
 
     protected override void TryAttack()
@@ -80,34 +65,32 @@ public class TurretProjectile : TurretBase
             yield break;
         }
 
-        ShootBullet(target);
+        ShootLaser(target);
         _isAttackWaiting = false;
     }
 
-    private void ShootBullet(Transform target)
+    private void ShootLaser(Transform target)
     {
-        GameObject bullet = GetBullet();
+        GameObject laser = laserPool.GetLaser();
 
-        if (bullet == null) return;
+        if (laser == null) return;
 
-        bullet.transform.position = shootPoint.position;
+        laser.transform.position = shootPoint.position;
 
-        Bullet bulletComponent = bullet.GetComponent<Bullet>();
-        bulletComponent.SetTarget(target, turretStat.shootingSpeed, turretStat.attackDamage);
+        Vector2 direction = target.position - shootPoint.position;
 
-        bullet.SetActive(true);
-    }
-
-    private GameObject GetBullet()
-    {
-        for (int i = 0; i < bulletPool.Count; i++)
+        if (direction != Vector2.zero)
         {
-            if (!bulletPool[i].activeSelf)
-            {
-                return bulletPool[i];
-            }
+            laser.transform.right = direction;
         }
 
-        return null;
+        LaserProjectile laserProjectile = laser.GetComponent<LaserProjectile>();
+
+        if (laserProjectile != null)
+        {
+            laserProjectile.SetDamage(turretStat.attackDamage);
+        }
+
+        laser.SetActive(true);
     }
 }
