@@ -6,18 +6,22 @@ public class EnemyHealth : MonoBehaviour
     private EnemyDie enemyDie;
 
     private float currentHp;
+    private void Awake()
+    {
+        enemyDie = GetComponent<EnemyDie>();
+    }
 
     private void OnEnable()
     {
         currentHp = enemyData.maxHp;
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float _damage)
     {
-        if (damage <= 0f)
+        if (_damage <= 0f)
             return;
 
-        currentHp -= damage;
+        currentHp -= _damage;
 
         if (currentHp <= 0f)
         {

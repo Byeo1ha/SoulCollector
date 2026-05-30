@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 2.5f;
+    [SerializeField] private EnemyData enemyData;
 
     private Transform[] waypoints;
     private int currentIndex;
@@ -12,9 +12,9 @@ public class EnemyMovement : MonoBehaviour
         waypoints = newWaypoints;
         currentIndex = 0;
 
-        if(waypoints == null || waypoints.Length == 0)
+        if (waypoints == null || waypoints.Length == 0)
         {
-            Debug.Log("이동 경로 비어있다");
+            Debug.Log("이동 경로가 비어 있습니다.");
             return;
         }
 
@@ -30,22 +30,28 @@ public class EnemyMovement : MonoBehaviour
     }
 
     private void Move()
+{
+    if (currentIndex >= waypoints.Length)
     {
-        if (currentIndex >= waypoints.Length)
-        {
-            gameObject.SetActive(false);
-            return;
-        }
-
-        transform.position = Vector3.MoveTowards(
-            transform.position,
-            waypoints[currentIndex].position,
-            moveSpeed * Time.deltaTime
-        );
-
-        if (Vector3.Distance(transform.position, waypoints[currentIndex].position) < 0.01f)
-        {
-            currentIndex++;
-        }
+        gameObject.SetActive(false);
+        return;
     }
+
+    if (waypoints[currentIndex] == null)
+    {
+        Debug.LogError($"{name}: Waypoint {currentIndex}가 비어 있습니다.");
+        return;
+    }
+
+    transform.position = Vector3.MoveTowards(
+        transform.position,
+        waypoints[currentIndex].position,
+        enemyData.moveSpeed * Time.deltaTime
+    );
+
+    if (Vector3.Distance(transform.position, waypoints[currentIndex].position) < 0.01f)
+    {
+        currentIndex++;
+    }
+}
 }

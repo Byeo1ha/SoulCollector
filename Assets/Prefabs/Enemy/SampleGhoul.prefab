@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3293766627310055954}
   - component: {fileID: 1174580948874878566}
   - component: {fileID: 7325988128216531612}
+  - component: {fileID: 1445921552321144774}
   m_Layer: 8
   m_Name: SampleGhoul
   m_TagString: Enemy
@@ -106,7 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c1c75dc189a54a4aa16433a6a39530d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
-  moveSpeed: 2.5
+  enemyData: {fileID: 11400000, guid: 0cf636c664b8cd64e98a8971546799a9, type: 2}
 --- !u!58 &1174580948874878566
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -156,3 +157,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   enemyData: {fileID: 11400000, guid: 0cf636c664b8cd64e98a8971546799a9, type: 2}
+--- !u!114 &1445921552321144774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4553159031111706947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5700f19e4caf69640a76a479722845c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDie
