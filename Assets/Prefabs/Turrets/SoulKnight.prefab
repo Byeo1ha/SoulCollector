@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1943087206714996768
+--- !u!1 &4298425063160356923
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,41 +8,61 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1745743543771814472}
-  - component: {fileID: 5835394839695332855}
-  - component: {fileID: 5316247920378358075}
-  - component: {fileID: 965456015540570963}
+  - component: {fileID: 2030537225590271765}
+  - component: {fileID: 3544713431970085616}
+  - component: {fileID: 2065391838662951208}
+  - component: {fileID: 767042267779406142}
   m_Layer: 7
-  m_Name: Beam Tower
+  m_Name: SoulKnight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1745743543771814472
+--- !u!4 &2030537225590271765
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1943087206714996768}
+  m_GameObject: {fileID: 4298425063160356923}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6515006606192861178}
+  - {fileID: 5774499739595652536}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &5835394839695332855
+--- !u!114 &3544713431970085616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4298425063160356923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 858d7dfe3d374bebb021530dbc2d5498, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TurretProjectile
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  turretData: {fileID: 11400000, guid: 60f3ae514cca3724fbd574c9549e5031, type: 2}
+  bulletPrefab: {fileID: 8586265678633914151, guid: 50aa8ecb38ba93a4da55d0f8ceaf9179, type: 3}
+  shootPoint: {fileID: 5774499739595652536}
+  maxBullets: 10
+  isFind: 1
+--- !u!212 &2065391838662951208
 SpriteRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1943087206714996768}
+  m_GameObject: {fileID: 4298425063160356923}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -94,32 +114,13 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &5316247920378358075
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1943087206714996768}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b71c6b51e2cac254aa64b68baf32e37f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TurretBeam
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 256
-  turretBeamData: {fileID: 11400000, guid: 60f3ae514cca3724fbd574c9549e5031, type: 2}
-  bulletBeamPool: {fileID: 0}
-  shootPoint: {fileID: 6515006606192861178}
-  isFind: 1
---- !u!61 &965456015540570963
+--- !u!61 &767042267779406142
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1943087206714996768}
+  m_GameObject: {fileID: 4298425063160356923}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
@@ -159,7 +160,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!1 &3141911061138335839
+--- !u!1 &4304346411270618207
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -167,7 +168,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6515006606192861178}
+  - component: {fileID: 5774499739595652536}
   m_Layer: 7
   m_Name: Shooting Point
   m_TagString: Untagged
@@ -175,18 +176,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6515006606192861178
+--- !u!4 &5774499739595652536
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3141911061138335839}
+  m_GameObject: {fileID: 4304346411270618207}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1745743543771814472}
+  m_Father: {fileID: 2030537225590271765}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class TurretArea : TurretBase
 {
-    [SerializeField] private TurretAreaData turretAreaData;
+    [SerializeField] private TurretData turretAreaData;
     [SerializeField] private BulletAreaPool bulletAreaPool;
     [SerializeField] private Transform shootPoint;
 
