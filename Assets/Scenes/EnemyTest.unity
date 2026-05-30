@@ -285,10 +285,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1173035181362197693, guid: 19c333b28a60be04b9b788f0a4897ed5, type: 3}
-      propertyPath: enemyData
-      value: 
-      objectReference: {fileID: 11400000, guid: 7f37feb6d93030647811e9605483a946, type: 2}
     - target: {fileID: 5562904790474329183, guid: 19c333b28a60be04b9b788f0a4897ed5, type: 3}
       propertyPath: m_Name
       value: SampleSE
@@ -336,8 +332,28 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5562904790474329183, guid: 19c333b28a60be04b9b788f0a4897ed5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 492677320}
   m_SourcePrefab: {fileID: 100100000, guid: 19c333b28a60be04b9b788f0a4897ed5, type: 3}
+--- !u!1 &492677319 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5562904790474329183, guid: 19c333b28a60be04b9b788f0a4897ed5, type: 3}
+  m_PrefabInstance: {fileID: 492677318}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &492677320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 492677319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5700f19e4caf69640a76a479722845c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDie
 --- !u!1 &516549321
 GameObject:
   m_ObjectHideFlags: 0
@@ -865,10 +881,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5314809264915814443, guid: 86a211b48cf3de643bc07f025f094042, type: 3}
-      propertyPath: enemyData
-      value: 
-      objectReference: {fileID: 11400000, guid: f4ce55e064ecb804aa699f53233c8148, type: 2}
     - target: {fileID: 5877890843523197470, guid: 86a211b48cf3de643bc07f025f094042, type: 3}
       propertyPath: m_Name
       value: SampleGolem
@@ -876,8 +888,28 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5877890843523197470, guid: 86a211b48cf3de643bc07f025f094042, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1445992429}
   m_SourcePrefab: {fileID: 100100000, guid: 86a211b48cf3de643bc07f025f094042, type: 3}
+--- !u!1 &1445992428 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5877890843523197470, guid: 86a211b48cf3de643bc07f025f094042, type: 3}
+  m_PrefabInstance: {fileID: 1445992427}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1445992429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445992428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5700f19e4caf69640a76a479722845c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDie
 --- !u!1 &1533227913
 GameObject:
   m_ObjectHideFlags: 0
@@ -1075,15 +1107,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: SampleGhoul
       objectReference: {fileID: 0}
-    - target: {fileID: 7325988128216531612, guid: 5ff7ad3088c8a7944a3ebcc25a6c089a, type: 3}
-      propertyPath: enemyData
-      value: 
-      objectReference: {fileID: 11400000, guid: 0cf636c664b8cd64e98a8971546799a9, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4553159031111706947, guid: 5ff7ad3088c8a7944a3ebcc25a6c089a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1872891322}
   m_SourcePrefab: {fileID: 100100000, guid: 5ff7ad3088c8a7944a3ebcc25a6c089a, type: 3}
+--- !u!1 &1872891321 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4553159031111706947, guid: 5ff7ad3088c8a7944a3ebcc25a6c089a, type: 3}
+  m_PrefabInstance: {fileID: 1872891320}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1872891322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1872891321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5700f19e4caf69640a76a479722845c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDie
 --- !u!1 &1937471809
 GameObject:
   m_ObjectHideFlags: 0

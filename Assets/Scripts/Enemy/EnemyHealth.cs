@@ -3,6 +3,7 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private EnemyData enemyData;
+    private EnemyDie enemyDie;
 
     private float currentHp;
 
@@ -20,12 +21,9 @@ public class EnemyHealth : MonoBehaviour
 
         if (currentHp <= 0f)
         {
-            Die();
+            enemyDie.Die();
         }
     }
 
-    private void Die()
-    {
-        gameObject.SetActive(false);
-    }
+    
 }
