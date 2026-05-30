@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7301658765047849188}
   - component: {fileID: 4646970276456382760}
   m_Layer: 0
-  m_Name: SampleBulletGatling
+  m_Name: DarkSorcererBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
