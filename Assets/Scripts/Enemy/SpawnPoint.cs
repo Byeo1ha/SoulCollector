@@ -4,18 +4,24 @@ public class SpawnPoint : MonoBehaviour
 {
     [SerializeField] private EnemyPath enemyPath;
 
-    public void SpawnEnemy(EnemyPool enemyPool)
+    public GameObject SpawnEnemy(EnemyPool enemyPool)
     {
         GameObject enemy = enemyPool.GetEnemy();
 
         if (enemy == null)
-            return;
+            return null;
 
         enemy.transform.position = transform.position;
 
         EnemyMovement movement = enemy.GetComponent<EnemyMovement>();
-        movement.SetPath(enemyPath.GetWaypoints());
+
+        if (movement != null)
+        {
+            movement.SetPath(enemyPath.GetWaypoints());
+        }
 
         enemy.SetActive(true);
+
+        return enemy;
     }
 }

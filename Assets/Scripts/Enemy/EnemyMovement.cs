@@ -1,11 +1,19 @@
 using UnityEngine;
 
+[RequireComponent(typeof(EnemyDie))]
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] private EnemyData enemyData;
 
+    private EnemyDie enemyDie;
     private Transform[] waypoints;
     private int currentIndex;
+    private float speedMultiplier = 1f;
+
+    private void Awake()
+    {
+        enemyDie = GetComponent<EnemyDie>();
+    }
 
     public void SetPath(Transform[] newWaypoints)
     {
@@ -14,11 +22,16 @@ public class EnemyMovement : MonoBehaviour
 
         if (waypoints == null || waypoints.Length == 0)
         {
-            Debug.Log("이동 경로가 비어 있습니다.");
+            Debug.LogError("이동 경로가 비어 있습니다.");
             return;
         }
 
         transform.position = waypoints[0].position;
+    }
+
+    public void SetSpeedMultiplier(float multiplier)
+    {
+        speedMultiplier = multiplier;
     }
 
     private void Update()
@@ -30,28 +43,22 @@ public class EnemyMovement : MonoBehaviour
     }
 
     private void Move()
-{
-    if (currentIndex >= waypoints.Length)
     {
-        gameObject.SetActive(false);
-        return;
-    }
+        if (currentIndex >= waypoints.Length)
+        {
+            enemyDie.Die();
+            return;
+        }
 
-    if (waypoints[currentIndex] == null)
-    {
-        Debug.LogError($"{name}: Waypoint {currentIndex}가 비어 있습니다.");
-        return;
-    }
+        transform.position = Vector3.MoveTowards(
+            transform.position,
+            waypoints[currentIndex].position,
+            enemyData.moveSpeed * speedMultiplier * Time.deltaTime
+        );
 
-    transform.position = Vector3.MoveTowards(
-        transform.position,
-        waypoints[currentIndex].position,
-        enemyData.moveSpeed * Time.deltaTime
-    );
-
-    if (Vector3.Distance(transform.position, waypoints[currentIndex].position) < 0.01f)
-    {
-        currentIndex++;
+        if (Vector3.Distance(transform.position, waypoints[currentIndex].position) < 0.01f)
+        {
+            currentIndex++;
+        }
     }
-}
 }

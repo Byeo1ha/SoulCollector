@@ -1,11 +1,14 @@
 using UnityEngine;
 
+[RequireComponent(typeof(EnemyDie))]
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private EnemyData enemyData;
-    private EnemyDie enemyDie;
 
+    private EnemyDie enemyDie;
     private float currentHp;
+    private float hpMultiplier = 1f;
+
     private void Awake()
     {
         enemyDie = GetComponent<EnemyDie>();
@@ -13,21 +16,25 @@ public class EnemyHealth : MonoBehaviour
 
     private void OnEnable()
     {
-        currentHp = enemyData.maxHp;
+        currentHp = enemyData.maxHp * hpMultiplier;
     }
 
-    public void TakeDamage(float _damage)
+    public void SetHpMultiplier(float multiplier)
     {
-        if (_damage <= 0f)
+        hpMultiplier = multiplier;
+        currentHp = enemyData.maxHp * hpMultiplier;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        if (damage <= 0f)
             return;
 
-        currentHp -= _damage;
+        currentHp -= damage;
 
         if (currentHp <= 0f)
         {
             enemyDie.Die();
         }
     }
-
-    
 }
