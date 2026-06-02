@@ -4,6 +4,13 @@ public class EnemyDie : MonoBehaviour
 {
     [SerializeField] private EnemyData enemyData;
 
+    private EnemyHealth enemyHealth;
+
+    private void Awake()
+    {
+        enemyHealth = GetComponent<EnemyHealth>();
+    }
+
     public void Die()
     {
         GiveReward();
@@ -12,6 +19,11 @@ public class EnemyDie : MonoBehaviour
 
     public void ReachGoal()
     {
+        if (PlayerBase.Instance != null)
+        {
+            PlayerBase.Instance.TakeDamage(enemyHealth.MaxHp);
+        }
+
         RemoveEnemy();
     }
 

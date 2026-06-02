@@ -4,6 +4,7 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private EnemyData enemyData;
+    public float MaxHp { get; private set; }
 
     private EnemyDie enemyDie;
     private float currentHp;
@@ -16,13 +17,15 @@ public class EnemyHealth : MonoBehaviour
 
     private void OnEnable()
     {
-        currentHp = enemyData.maxHp * hpMultiplier;
+    MaxHp = enemyData.maxHp * hpMultiplier;
+    currentHp = MaxHp;
     }
 
     public void SetHpMultiplier(float multiplier)
     {
-        hpMultiplier = multiplier;
-        currentHp = enemyData.maxHp * hpMultiplier;
+    hpMultiplier = multiplier;
+    MaxHp = enemyData.maxHp * hpMultiplier;
+    currentHp = MaxHp;
     }
 
     public void TakeDamage(float damage)
