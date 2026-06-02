@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 718043453403939365}
   - component: {fileID: 5976388313434559213}
+  - component: {fileID: -4768363386502697018}
   - component: {fileID: 3293766627310055954}
   - component: {fileID: 1174580948874878566}
   - component: {fileID: 7325988128216531612}
@@ -95,6 +96,33 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!50 &-4768363386502697018
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4553159031111706947}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!114 &3293766627310055954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,3 +197,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5700f19e4caf69640a76a479722845c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDie
+  enemyData: {fileID: 11400000, guid: 0cf636c664b8cd64e98a8971546799a9, type: 2}

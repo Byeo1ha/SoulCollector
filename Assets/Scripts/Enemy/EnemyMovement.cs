@@ -46,7 +46,7 @@ public class EnemyMovement : MonoBehaviour
     {
         if (currentIndex >= waypoints.Length)
         {
-            enemyDie.Die();
+            enemyDie.ReachGoal();
             return;
         }
 
