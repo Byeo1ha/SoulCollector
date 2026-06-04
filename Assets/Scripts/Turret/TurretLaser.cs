@@ -9,6 +9,7 @@ public class TurretLaser : TurretBase
 
     [SerializeField] private bool isFind = true;
 
+    private SpriteRenderer spriteRenderer;
     private TurretStat turretStat;
     private Transform _currentTarget;
     private float _nextFireTime = 0f;
@@ -16,6 +17,7 @@ public class TurretLaser : TurretBase
 
     private void Awake()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         turretStat = turretData.RuntimeStat;
     }
 
@@ -44,6 +46,11 @@ public class TurretLaser : TurretBase
     {
         if (Time.time < _nextFireTime) return;
         if (_isAttackWaiting) return;
+
+        Vector3 currentPosition = transform.position;
+        
+        if (currentPosition.x < target.position.x) spriteRenderer.flipX = false;
+        else spriteRenderer.flipX = true;
 
         _nextFireTime = Time.time + turretStat.cooldown;
 
