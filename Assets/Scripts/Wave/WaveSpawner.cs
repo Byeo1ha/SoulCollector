@@ -6,37 +6,31 @@ public class WaveSpawner : MonoBehaviour
 {
     [SerializeField] private int currentStage = 1;
 
-    [SerializeField] private SpawnPoint spawnPointA;
-    [SerializeField] private SpawnPoint spawnPointB;
+    [SerializeField] private SpawnPoint spawnPoint;
 
     [SerializeField] private EnemyPool ghoulPool;
     [SerializeField] private EnemyPool soulEaterPool;
     [SerializeField] private EnemyPool crystalGolemPool;
 
     public IEnumerator SpawnWave(int stage)
-{
-    WaveManager.Instance.SetSpawningState(true);
-
-    int enemyCount = WaveCalculator.GetEnemyCount(stage);
-    float spawnInterval = WaveCalculator.GetSpawnInterval(stage);
-    float hpMultiplier = stage >= 11 ? 2f : 1f;
-
-    List<EnemyPool> spawnList = CreateSpawnList(enemyCount, stage);
-
-    for (int i = 0; i < spawnList.Count; i += 2)
     {
-        SpawnEnemy(spawnPointA, spawnList[i], hpMultiplier);
+        WaveManager.Instance.SetSpawningState(true);
 
-        if (i + 1 < spawnList.Count)
+        int enemyCount = WaveCalculator.GetEnemyCount(stage);
+        float spawnInterval = WaveCalculator.GetSpawnInterval(stage);
+        float hpMultiplier = stage >= 11 ? 2f : 1f;
+
+        List<EnemyPool> spawnList = CreateSpawnList(enemyCount, stage);
+
+        for (int i = 0; i < spawnList.Count; i++)
         {
-            SpawnEnemy(spawnPointB, spawnList[i + 1], hpMultiplier);
+            SpawnEnemy(spawnPoint, spawnList[i], hpMultiplier);
+
+            yield return new WaitForSeconds(spawnInterval);
         }
 
-        yield return new WaitForSeconds(spawnInterval);
+        WaveManager.Instance.SetSpawningState(false);
     }
-
-    WaveManager.Instance.SetSpawningState(false);
-}
 
     private void SpawnEnemy(SpawnPoint spawnPoint, EnemyPool enemyPool, float hpMultiplier)
 {
