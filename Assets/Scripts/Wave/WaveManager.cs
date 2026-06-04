@@ -6,6 +6,7 @@ public class WaveManager : MonoBehaviour
     public static WaveManager Instance { get; private set; }
 
     [SerializeField] private WaveSpawner waveSpawner;
+    [SerializeField] private WaveUI waveUI;
     [SerializeField] private float prepareTime = 30f;
     [SerializeField] private int maxStage = 20;
 
@@ -76,6 +77,9 @@ public class WaveManager : MonoBehaviour
 
     private void StartWave()
     {
+        waveUI.UpdateWaveText(CurrentStage, maxStage);
+        waveUI.HidePrepareTime();
+
         Debug.Log($"{CurrentStage} 웨이브 시작");
         StartCoroutine(waveSpawner.SpawnWave(CurrentStage));
     }
@@ -89,22 +93,31 @@ public class WaveManager : MonoBehaviour
     }
 
     private IEnumerator PrepareRoutine()
+{
+    Debug.Log("정비 시간 시작");
+
+    float timer = prepareTime;
+
+    while (timer > 0f)
     {
-        Debug.Log("정비 시간 시작");
-
-        yield return new WaitForSeconds(prepareTime);
-
-        prepareCoroutine = null;
-
-        if (CurrentStage >= maxStage)
-        {
-            GameClear();
-            yield break;
-        }
-
-        CurrentStage++;
-        StartWave();
+        waveUI.UpdatePrepareTime(timer);
+        timer -= Time.deltaTime;
+        yield return null;
     }
+
+    waveUI.HidePrepareTime();
+
+    prepareCoroutine = null;
+
+    if (CurrentStage >= maxStage)
+    {
+        GameClear();
+        yield break;
+    }
+
+    CurrentStage++;
+    StartWave();
+}
 
     private void GameClear()
     {
