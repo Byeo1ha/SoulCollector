@@ -4,9 +4,10 @@ public class CurrencyManager : MonoBehaviour
 {
     public static CurrencyManager Instance { get; private set; }
 
-    public int CurrentCrystal { get; private set; }
+    [SerializeField] private int startSoul = 0;
+    [SerializeField] private SoulUI soulUI;
 
-    [SerializeField] private int startCrystal = 0;
+    public int CurrentSoul { get; private set; }
 
     private void Awake()
     {
@@ -21,31 +22,29 @@ public class CurrencyManager : MonoBehaviour
 
     private void Start()
     {
-        CurrentCrystal = startCrystal;
-        Debug.Log($"시작 크리스탈: {CurrentCrystal}");
+        CurrentSoul = startSoul;
+        soulUI.UpdateSoulText(CurrentSoul);
     }
 
-    public void AddCrystal(int amount)
+    public void AddSoul(int amount)
     {
         if (amount <= 0)
             return;
 
-        CurrentCrystal += amount;
-
-        Debug.Log($"크리스탈 획득: +{amount} / 현재 크리스탈: {CurrentCrystal}");
+        CurrentSoul += amount;
+        soulUI.UpdateSoulText(CurrentSoul);
     }
 
-    public bool TrySpendCrystal(int amount)
+    public bool TrySpendSoul(int amount)
     {
         if (amount <= 0)
             return false;
 
-        if (CurrentCrystal < amount)
+        if (CurrentSoul < amount)
             return false;
 
-        CurrentCrystal -= amount;
-
-        Debug.Log($"크리스탈 사용: -{amount} / 현재 크리스탈: {CurrentCrystal}");
+        CurrentSoul -= amount;
+        soulUI.UpdateSoulText(CurrentSoul);
 
         return true;
     }

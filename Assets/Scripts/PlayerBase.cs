@@ -5,6 +5,7 @@ public class PlayerBase : MonoBehaviour
     public static PlayerBase Instance { get; private set; }
 
     [SerializeField] private float maxHp = 1000f;
+    [SerializeField] private BaseHpUI baseHpUI;
 
     public float CurrentHp { get; private set; }
 
@@ -20,14 +21,20 @@ public class PlayerBase : MonoBehaviour
         CurrentHp = maxHp;
     }
 
+    private void Start()
+    {
+        baseHpUI.UpdateHp(CurrentHp, maxHp);
+    }
+
     public void TakeDamage(float damage)
     {
         if (damage <= 0f)
             return;
 
         CurrentHp -= damage;
+        CurrentHp = Mathf.Max(CurrentHp, 0f);
 
-        Debug.Log($"본진 피해: {damage} / 남은 체력: {CurrentHp}");
+        baseHpUI.UpdateHp(CurrentHp, maxHp);
 
         if (CurrentHp <= 0f)
         {

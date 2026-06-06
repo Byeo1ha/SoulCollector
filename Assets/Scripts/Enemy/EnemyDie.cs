@@ -28,12 +28,12 @@ public class EnemyDie : MonoBehaviour
     }
 
     private void GiveReward()
-    {
-        if (CurrencyManager.Instance == null)
-            return;
+{
+    if (CurrencyManager.Instance == null)
+        return;
 
-        CurrencyManager.Instance.AddCrystal(enemyData.crystalReward);
-    }
+    CurrencyManager.Instance.AddSoul(enemyData.crystalReward);
+}
 
     private void RemoveEnemy()
     {

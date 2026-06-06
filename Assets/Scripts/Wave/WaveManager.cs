@@ -58,31 +58,30 @@ public class WaveManager : MonoBehaviour
     }
 
     public void StartNextWaveImmediately()
+{
+    if (prepareCoroutine == null)
+        return;
+
+    StopCoroutine(prepareCoroutine);
+    prepareCoroutine = null;
+
+    if (CurrentStage >= maxStage)
     {
-        if (prepareCoroutine != null)
-        {
-            StopCoroutine(prepareCoroutine);
-            prepareCoroutine = null;
-        }
-
-        if (CurrentStage >= maxStage)
-        {
-            GameClear();
-            return;
-        }
-
-        CurrentStage++;
-        StartWave();
+        GameClear();
+        return;
     }
+
+    CurrentStage++;
+    StartWave();
+}
 
     private void StartWave()
-    {
-        waveUI.UpdateWaveText(CurrentStage, maxStage);
-        waveUI.HidePrepareTime();
+{
+    waveUI.UpdateWaveText(CurrentStage, maxStage);
+    waveUI.SetWaveState();
 
-        Debug.Log($"{CurrentStage} 웨이브 시작");
-        StartCoroutine(waveSpawner.SpawnWave(CurrentStage));
-    }
+    StartCoroutine(waveSpawner.SpawnWave(CurrentStage));
+}
 
     private void StartPrepareTime()
     {
@@ -96,16 +95,9 @@ public class WaveManager : MonoBehaviour
 {
     Debug.Log("정비 시간 시작");
 
-    float timer = prepareTime;
+    waveUI.SetBreakState();
 
-    while (timer > 0f)
-    {
-        waveUI.UpdatePrepareTime(timer);
-        timer -= Time.deltaTime;
-        yield return null;
-    }
-
-    waveUI.HidePrepareTime();
+    yield return new WaitForSeconds(prepareTime);
 
     prepareCoroutine = null;
 
@@ -123,4 +115,6 @@ public class WaveManager : MonoBehaviour
     {
         Debug.Log("게임 클리어");
     }
+
+    
 }

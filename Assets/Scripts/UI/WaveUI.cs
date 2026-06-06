@@ -3,21 +3,21 @@ using UnityEngine;
 
 public class WaveUI : MonoBehaviour
 {
-    [SerializeField] private TMP_Text waveText;
-    [SerializeField] private TMP_Text prepareTimeText;
+    [SerializeField] private TMP_Text waveNumberText;
+    [SerializeField] private TMP_Text statusSituationText;
 
     public void UpdateWaveText(int currentStage, int maxStage)
     {
-        waveText.text = $"Wave {currentStage} / {maxStage}";
+        waveNumberText.text = $"{currentStage} / {maxStage}";
     }
 
-    public void UpdatePrepareTime(float time)
+    public void SetWaveState()
     {
-        prepareTimeText.text = $"정비 시간 : {Mathf.CeilToInt(time)}";
+        statusSituationText.text = "WAVE!";
     }
 
-    public void HidePrepareTime()
+    public void SetBreakState()
     {
-        prepareTimeText.text = "";
+        statusSituationText.text = "BREAK";
     }
 }
