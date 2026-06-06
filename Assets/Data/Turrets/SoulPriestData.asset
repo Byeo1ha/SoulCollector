@@ -16,4 +16,5 @@ MonoBehaviour:
   attackDamage: 100
   attackRange: 7
   cooldown: 2.5
+  attackDelay: 1.5
   shootingSpeed: 3
