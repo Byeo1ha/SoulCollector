@@ -1,39 +1,52 @@
+using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(EnemyHealth))]
 public class EnemyDie : MonoBehaviour
 {
     [SerializeField] private EnemyData enemyData;
+    [SerializeField] private float deathDelay = 0.8f;
 
     private EnemyHealth enemyHealth;
+    private Animator animator;
 
     private void Awake()
     {
         enemyHealth = GetComponent<EnemyHealth>();
+        animator = GetComponent<Animator>();
     }
 
     public void Die()
     {
         GiveReward();
-        RemoveEnemy();
+        StartCoroutine(DieRoutine());
     }
 
     public void ReachGoal()
     {
-        if (PlayerBase.Instance != null)
+        PlayerBase.Instance.TakeDamage(enemyHealth.MaxHp);
+        RemoveEnemy();
+    }
+
+    private IEnumerator DieRoutine()
+    {
+        if (animator != null)
         {
-            PlayerBase.Instance.TakeDamage(enemyHealth.MaxHp);
+            animator.SetTrigger("Die");
         }
+
+        yield return new WaitForSeconds(deathDelay);
 
         RemoveEnemy();
     }
 
     private void GiveReward()
-{
-    if (CurrencyManager.Instance == null)
-        return;
+    {
+        if (CurrencyManager.Instance == null)
+            return;
 
-    CurrencyManager.Instance.AddSoul(enemyData.crystalReward);
-}
+        CurrencyManager.Instance.AddSoul(enemyData.crystalReward);
+    }
 
     private void RemoveEnemy()
     {

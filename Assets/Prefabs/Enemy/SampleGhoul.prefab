@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 1174580948874878566}
   - component: {fileID: 7325988128216531612}
   - component: {fileID: 1445921552321144774}
+  - component: {fileID: -3970010209200672530}
+  - component: {fileID: -8027223540811949211}
   m_Layer: 8
   m_Name: SampleGhoul
   m_TagString: Enemy
@@ -198,3 +200,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDie
   enemyData: {fileID: 11400000, guid: 0cf636c664b8cd64e98a8971546799a9, type: 2}
+--- !u!114 &-3970010209200672530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4553159031111706947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47e42d28cda46b34cb7f8804e6db4c25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.UI.BaseInputOverride
+--- !u!95 &-8027223540811949211
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4553159031111706947}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c176c164eb54dbb4babe00cc397dd9ed, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
