@@ -50,11 +50,7 @@ public class TurretLaser : TurretBase
         if (Time.time < _nextFireTime) return;
         if (_isAttackWaiting) return;
 
-        Vector3 currentPosition = transform.position;
-        
-        if (currentPosition.x < target.position.x) 
-        transform.localScale = new Vector3(_originalScaleXValue, transform.localScale.y, transform.localScale.z);
-        else transform.localScale = new Vector3(_originalScaleXValue * (-1), transform.localScale.y, transform.localScale.z);
+        LookAtTarget(target);
 
         _nextFireTime = Time.time + turretStat.cooldown;
 
@@ -73,8 +69,15 @@ public class TurretLaser : TurretBase
 
         if (!IsTargetValid(target, transform.position, turretStat.attackRange))
         {
-            _isAttackWaiting = false;
-            yield break;
+            target = FindFirstTarget(transform.position, turretStat.attackRange);
+
+            if (target == null)
+            {
+                _isAttackWaiting = false;
+                yield break;
+            }
+
+            LookAtTarget(target);
         }
 
         ShootLaser(target);
@@ -104,5 +107,19 @@ public class TurretLaser : TurretBase
         }
 
         laser.SetActive(true);
+    }
+
+    private void LookAtTarget(Transform target)
+    {
+        Vector3 currentPosition = transform.position;
+
+        if (currentPosition.x < target.position.x)
+        {
+            transform.localScale = new Vector3(_originalScaleXValue, transform.localScale.y, transform.localScale.z);
+        }
+        else
+        {
+            transform.localScale = new Vector3(_originalScaleXValue * (-1), transform.localScale.y, transform.localScale.z);
+        }
     }
 }
