@@ -15,6 +15,20 @@ public class WaveManager : MonoBehaviour
     private int aliveEnemyCount;
     private bool isSpawning;
     private Coroutine prepareCoroutine;
+    private bool isGameEnded;
+
+    public bool IsGameEnded => isGameEnded;
+
+    public void EndGame()
+    {
+    isGameEnded = true;
+
+    if (prepareCoroutine != null)
+    {
+        StopCoroutine(prepareCoroutine);
+        prepareCoroutine = null;
+    }
+    }
 
     private void Awake()
     {
@@ -76,19 +90,26 @@ public class WaveManager : MonoBehaviour
 }
 
     private void StartWave()
-{
+    {
+    if (isGameEnded)
+        return;
+
     waveUI.UpdateWaveText(CurrentStage, maxStage);
     waveUI.SetWaveState();
 
+    Debug.Log($"{CurrentStage} 웨이브 시작");
     StartCoroutine(waveSpawner.SpawnWave(CurrentStage));
-}
+    }
 
     private void StartPrepareTime()
     {
-        if (prepareCoroutine != null)
-            return;
+    if (isGameEnded)
+        return;
 
-        prepareCoroutine = StartCoroutine(PrepareRoutine());
+    if (prepareCoroutine != null)
+        return;
+
+    prepareCoroutine = StartCoroutine(PrepareRoutine());
     }
 
     private IEnumerator PrepareRoutine()
@@ -113,7 +134,8 @@ public class WaveManager : MonoBehaviour
 
     private void GameClear()
     {
-        Debug.Log("게임 클리어");
+        EndGame();
+        GameUIManager.Instance.ShowGameClear();
     }
 
     

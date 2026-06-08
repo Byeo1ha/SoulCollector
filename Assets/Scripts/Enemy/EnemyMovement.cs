@@ -29,6 +29,28 @@ public class EnemyMovement : MonoBehaviour
         transform.position = waypoints[0].position;
     }
 
+    public void SetPathFromCurrentPosition(Transform[] newWaypoints, int startIndex)
+    {
+        waypoints = newWaypoints;
+        currentIndex = startIndex;
+
+        if (waypoints == null || waypoints.Length == 0)
+        {
+            Debug.LogError("이동 경로가 비어 있습니다.");
+            return;
+        }
+    }
+
+    public Transform[] GetWaypoints()
+    {
+        return waypoints;
+    }
+
+    public int GetCurrentIndex()
+    {
+        return currentIndex;
+    }
+
     public void SetSpeedMultiplier(float multiplier)
     {
         speedMultiplier = multiplier;

@@ -11,6 +11,8 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] private EnemyPool ghoulPool;
     [SerializeField] private EnemyPool soulEaterPool;
     [SerializeField] private EnemyPool crystalGolemPool;
+    [SerializeField] private EnemyPool dropperPool;
+    [SerializeField] private EnemyPool guardianPool;
 
     public IEnumerator SpawnWave(int stage)
     {
@@ -24,30 +26,33 @@ public class WaveSpawner : MonoBehaviour
 
         for (int i = 0; i < spawnList.Count; i++)
         {
-            SpawnEnemy(spawnPoint, spawnList[i], hpMultiplier);
+        if (WaveManager.Instance.IsGameEnded)
+        yield break;
 
-            yield return new WaitForSeconds(spawnInterval);
-        }
+        SpawnEnemy(spawnPoint, spawnList[i], hpMultiplier);
+
+        yield return new WaitForSeconds(spawnInterval);
+    }
 
         WaveManager.Instance.SetSpawningState(false);
     }
 
     private void SpawnEnemy(SpawnPoint spawnPoint, EnemyPool enemyPool, float hpMultiplier)
-{
-    GameObject enemy = spawnPoint.SpawnEnemy(enemyPool);
+    {
+        GameObject enemy = spawnPoint.SpawnEnemy(enemyPool);
 
-    if (enemy == null)
+        if (enemy == null)
         return;
 
-    EnemyHealth health = enemy.GetComponent<EnemyHealth>();
+        EnemyHealth health = enemy.GetComponent<EnemyHealth>();
 
-    if (health != null)
-    {
+        if (health != null)
+        {
         health.SetHpMultiplier(hpMultiplier);
-    }
+        }
 
-    WaveManager.Instance.RegisterEnemy();
-}
+        WaveManager.Instance.RegisterEnemy();
+    }
 
     private float GetHpMultiplier()
     {
@@ -58,7 +63,19 @@ public class WaveSpawner : MonoBehaviour
 {
     List<EnemyPool> result = new();
 
-    if (stage <= 3)
+    if (stage == 10)
+    {
+        enemyCount -= 1;
+        AddThreeTypeEnemies(result, enemyCount);
+        result.Add(dropperPool);
+    }
+    else if (stage == 20)
+    {
+        enemyCount -= 1;
+        AddThreeTypeEnemies(result, enemyCount);
+        result.Add(guardianPool);
+    }
+    else if (stage <= 3)
     {
         AddEnemies(result, ghoulPool, enemyCount);
     }
@@ -72,7 +89,6 @@ public class WaveSpawner : MonoBehaviour
     }
 
     Shuffle(result);
-
     return result;
 }
 

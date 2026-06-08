@@ -44,6 +44,7 @@ public class PlayerBase : MonoBehaviour
 
     private void GameOver()
     {
-        Debug.Log("게임 오버");
+        WaveManager.Instance.EndGame();
+        GameUIManager.Instance.ShowGameOver();
     }
 }

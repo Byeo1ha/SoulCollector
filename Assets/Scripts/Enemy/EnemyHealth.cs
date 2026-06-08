@@ -9,10 +9,12 @@ public class EnemyHealth : MonoBehaviour
     private EnemyDie enemyDie;
     private float currentHp;
     private float hpMultiplier = 1f;
+    private DropperSkill dropperSkill;
 
     private void Awake()
     {
         enemyDie = GetComponent<EnemyDie>();
+        dropperSkill = GetComponent<DropperSkill>();
     }
 
     private void OnEnable()
@@ -29,15 +31,20 @@ public class EnemyHealth : MonoBehaviour
     }
 
     public void TakeDamage(float damage)
+{
+    if (damage <= 0f)
+        return;
+
+    currentHp -= damage;
+
+    if (dropperSkill != null)
     {
-        if (damage <= 0f)
-            return;
-
-        currentHp -= damage;
-
-        if (currentHp <= 0f)
-        {
-            enemyDie.Die();
-        }
+        dropperSkill.TrySummon(currentHp, MaxHp);
     }
+
+    if (currentHp <= 0f)
+    {
+        enemyDie.Die();
+    }
+}
 }
