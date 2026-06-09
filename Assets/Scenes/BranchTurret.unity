@@ -2160,10 +2160,11 @@ Transform:
   m_GameObject: {fileID: 1215842810}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.718, y: -0.613, z: 0}
-  m_LocalScale: {x: 1.27, y: 1.27, z: 1.27}
+  m_LocalPosition: {x: 2.74, y: -0.9, z: 0}
+  m_LocalScale: {x: 1.31, y: 1.31, z: 1.31}
   m_ConstrainProportionsScale: 1
   m_Children:
+  - {fileID: 1964148170}
   - {fileID: 806110182}
   - {fileID: 1358297295}
   - {fileID: 1747444631}
@@ -3066,7 +3067,7 @@ Transform:
   m_GameObject: {fileID: 1577167219}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.74867, y: -3.3661501, z: 0}
+  m_LocalPosition: {x: -1.75, y: -3.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3294,7 +3295,7 @@ Transform:
   m_GameObject: {fileID: 1747444629}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.30867, y: 0.13384998, z: 0}
+  m_LocalPosition: {x: -10.4, y: 0.13384998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3559,7 +3560,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6.75
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3583,12 +3584,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1964148167}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.1221375, y: 0.9236642, z: -7.6335883}
+  m_LocalScale: {x: 0.76335883, y: 0.76335883, z: 0.76335883}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1215842811}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1964148171
 MonoBehaviour:
@@ -4459,7 +4460,6 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1964148170}
   - {fileID: 89538078}
   - {fileID: 2139040273}
   - {fileID: 1135397830}
