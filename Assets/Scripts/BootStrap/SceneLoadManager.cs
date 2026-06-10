@@ -6,6 +6,11 @@ public class SceneLoadManager : MonoBehaviour
 {
     public static SceneLoadManager Instance { get; private set; }
 
+    [SerializeField] private string loadingSceneName = "LoadingScene";
+
+    private string _targetSceneName;
+    private float _minLoadingTime;
+
     private void Awake()
     {
         if (Instance == null)
@@ -36,6 +41,35 @@ public class SceneLoadManager : MonoBehaviour
         yield return new WaitForSeconds(1.2f);
         operation.allowSceneActivation = true;
 
+        while (!operation.isDone) yield return null;
+
         FadeManager.Instance.FadeIn();
+    }
+
+    public void LoadSceneWithLoading(string sceneName, float minLoadingTime)
+    {
+        if (FadeManager.Instance == null) return;
+
+        _targetSceneName = sceneName;
+        _minLoadingTime = minLoadingTime;
+
+        StartCoroutine(CLoadScene(loadingSceneName));
+    }
+
+    public void LoadTargetScene()
+    {
+        if (string.IsNullOrEmpty(_targetSceneName)) return;
+
+        StartCoroutine(CLoadTargetScene());
+    }
+
+    private IEnumerator CLoadTargetScene()
+    {
+        yield return new WaitForSeconds(_minLoadingTime);
+
+        yield return CLoadScene(_targetSceneName);
+
+        _targetSceneName = null;
+        _minLoadingTime = 0f; 
     }
 }

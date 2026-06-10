@@ -41,7 +41,8 @@ public class BootStrapManager : MonoBehaviour
         DeActiveLoadingObj();
         yield return new WaitForSeconds(0.2f);
         //페이드 아웃 연출은 어색해서 비동기 로드로 대체.
-        SceneManager.LoadScene(nextSceneName);
+        //SceneManager.LoadScene(nextSceneName); << 완성되면 이 코드로 바꿀 것.
+        SceneLoadManager.Instance.LoadSceneWithLoading(nextSceneName, 2f);
     }
 
     private bool BootStrap()
@@ -74,12 +75,14 @@ public class BootStrapManager : MonoBehaviour
     {
         while (true)
         {
+            loadingText.text = "Loading.";
+            yield return new WaitForSeconds(0.4f);
             loadingText.text = "Loading..";
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.4f);
             loadingText.text = "Loading...";
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.4f);
             loadingText.text = "Loading....";
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.4f);
         }
     }
 
