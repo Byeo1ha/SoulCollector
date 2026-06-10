@@ -91,7 +91,7 @@ public class TurretBuildController : MonoBehaviour
         Vector3 mousePos = mainCam.ScreenToWorldPoint(InputManager.Instance.mouseVec);
         mousePos.z = 0;
 
-        Vector2 point = mousePos;
+        Vector2 point = gridSnapper.GetSnappedPosition(mousePos);
 
         if (!turretValidator.CanBuildZone(point))
         {
