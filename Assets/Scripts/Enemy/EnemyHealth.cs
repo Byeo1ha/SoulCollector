@@ -1,30 +1,50 @@
 using UnityEngine;
 
+[RequireComponent(typeof(EnemyDie))]
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private EnemyData enemyData;
-    private EnemyDie enemyDie;
+    public float MaxHp { get; private set; }
 
+    private EnemyDie enemyDie;
     private float currentHp;
+    private float hpMultiplier = 1f;
+    private DropperSkill dropperSkill;
+
+    private void Awake()
+    {
+        enemyDie = GetComponent<EnemyDie>();
+        dropperSkill = GetComponent<DropperSkill>();
+    }
 
     private void OnEnable()
     {
-        currentHp = enemyData.maxHp;
+    MaxHp = enemyData.maxHp * hpMultiplier;
+    currentHp = MaxHp;
+    }
+
+    public void SetHpMultiplier(float multiplier)
+    {
+    hpMultiplier = multiplier;
+    MaxHp = enemyData.maxHp * hpMultiplier;
+    currentHp = MaxHp;
     }
 
     public void TakeDamage(float damage)
+{
+    if (damage <= 0f)
+        return;
+
+    currentHp -= damage;
+
+    if (dropperSkill != null)
     {
-        if (damage <= 0f)
-            return;
-
-        currentHp -= damage;
-
-        if (currentHp <= 0f)
-        {
-            gameObject.SetActive(false); //<< 머지할 때 지울 것
-            //enemyDie.Die(); << 머지할 때 되돌릴 것
-        }
+        dropperSkill.TrySummon(currentHp, MaxHp);
     }
 
-    
+    if (currentHp <= 0f)
+    {
+        enemyDie.Die();
+    }
+}
 }

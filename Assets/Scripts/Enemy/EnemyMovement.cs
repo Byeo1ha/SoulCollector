@@ -1,24 +1,59 @@
 using UnityEngine;
 
+[RequireComponent(typeof(EnemyDie))]
 public class EnemyMovement : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 2.5f;
+    [SerializeField] private EnemyData enemyData;
 
+    private EnemyDie enemyDie;
     private Transform[] waypoints;
     private int currentIndex;
+    private float speedMultiplier = 1f;
+
+    private void Awake()
+    {
+        enemyDie = GetComponent<EnemyDie>();
+    }
 
     public void SetPath(Transform[] newWaypoints)
     {
         waypoints = newWaypoints;
         currentIndex = 0;
 
-        if(waypoints == null || waypoints.Length == 0)
+        if (waypoints == null || waypoints.Length == 0)
         {
-            Debug.Log("이동 경로 비어있다");
+            Debug.LogError("이동 경로가 비어 있습니다.");
             return;
         }
 
         transform.position = waypoints[0].position;
+    }
+
+    public void SetPathFromCurrentPosition(Transform[] newWaypoints, int startIndex)
+    {
+        waypoints = newWaypoints;
+        currentIndex = startIndex;
+
+        if (waypoints == null || waypoints.Length == 0)
+        {
+            Debug.LogError("이동 경로가 비어 있습니다.");
+            return;
+        }
+    }
+
+    public Transform[] GetWaypoints()
+    {
+        return waypoints;
+    }
+
+    public int GetCurrentIndex()
+    {
+        return currentIndex;
+    }
+
+    public void SetSpeedMultiplier(float multiplier)
+    {
+        speedMultiplier = multiplier;
     }
 
     private void Update()
@@ -33,14 +68,14 @@ public class EnemyMovement : MonoBehaviour
     {
         if (currentIndex >= waypoints.Length)
         {
-            gameObject.SetActive(false);
+            enemyDie.ReachGoal();
             return;
         }
 
         transform.position = Vector3.MoveTowards(
             transform.position,
             waypoints[currentIndex].position,
-            moveSpeed * Time.deltaTime
+            enemyData.moveSpeed * speedMultiplier * Time.deltaTime
         );
 
         if (Vector3.Distance(transform.position, waypoints[currentIndex].position) < 0.01f)

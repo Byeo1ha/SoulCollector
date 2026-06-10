@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97bf4fb0ee7d2524fb3db4b7308e28ad, type: 3}
-  m_Name: GhoulData
+  m_Name: GuardianData
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  <maxHp>k__BackingField: 30
-  <moveSpeed>k__BackingField: 2.5
+  <maxHp>k__BackingField: 35000
+  <moveSpeed>k__BackingField: 0.6
   <damage>k__BackingField: 0
-  <crystalReward>k__BackingField: 5
+  <crystalReward>k__BackingField: 0
