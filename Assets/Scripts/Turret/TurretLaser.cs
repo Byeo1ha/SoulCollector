@@ -80,7 +80,15 @@ public class TurretLaser : TurretBase
             LookAtTarget(target);
         }
 
+        if (!isFind)
+        {
+            _isAttackWaiting = false;
+            yield break;
+        }
+
+
         ShootLaser(target);
+
         _isAttackWaiting = false;
     }
 
@@ -122,4 +130,9 @@ public class TurretLaser : TurretBase
             transform.localScale = new Vector3(_originalScaleXValue * (-1), transform.localScale.y, transform.localScale.z);
         }
     }
+
+    public void SetFind(bool value)
+    {
+        isFind = value;
+    }   
 }

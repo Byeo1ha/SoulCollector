@@ -2,23 +2,10 @@ using UnityEngine;
 
 public class CurrencyManager : MonoBehaviour
 {
-    public static CurrencyManager Instance { get; private set; }
-
     [SerializeField] private int startSoul = 0;
     [SerializeField] private SoulUI soulUI;
 
     public int CurrentSoul { get; private set; }
-
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-    }
 
     private void Start()
     {

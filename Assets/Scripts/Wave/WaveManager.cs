@@ -3,43 +3,20 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-    public static WaveManager Instance { get; private set; }
-
     [SerializeField] private WaveSpawner waveSpawner;
     [SerializeField] private WaveUI waveUI;
+    [SerializeField] private GameUIManager gameUIManager;
+
     [SerializeField] private float prepareTime = 30f;
     [SerializeField] private int maxStage = 20;
 
     public int CurrentStage { get; private set; } = 1;
+    public bool IsGameEnded => isGameEnded;
 
     private int aliveEnemyCount;
     private bool isSpawning;
     private Coroutine prepareCoroutine;
     private bool isGameEnded;
-
-    public bool IsGameEnded => isGameEnded;
-
-    public void EndGame()
-    {
-    isGameEnded = true;
-
-    if (prepareCoroutine != null)
-    {
-        StopCoroutine(prepareCoroutine);
-        prepareCoroutine = null;
-    }
-    }
-
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-    }
 
     private void Start()
     {
@@ -71,72 +48,85 @@ public class WaveManager : MonoBehaviour
         }
     }
 
-    public void StartNextWaveImmediately()
-{
-    if (prepareCoroutine == null)
-        return;
-
-    StopCoroutine(prepareCoroutine);
-    prepareCoroutine = null;
-
-    if (CurrentStage >= maxStage)
+    public void EndGame()
     {
-        GameClear();
-        return;
+        isGameEnded = true;
+
+        if (prepareCoroutine != null)
+        {
+            StopCoroutine(prepareCoroutine);
+            prepareCoroutine = null;
+        }
     }
 
-    CurrentStage++;
-    StartWave();
-}
+    public void StartNextWaveImmediately()
+    {
+        if (prepareCoroutine == null)
+            return;
+
+        StopCoroutine(prepareCoroutine);
+        prepareCoroutine = null;
+
+        if (CurrentStage >= maxStage)
+        {
+            GameClear();
+            return;
+        }
+
+        CurrentStage++;
+        StartWave();
+    }
 
     private void StartWave()
     {
-    if (isGameEnded)
-        return;
+        if (isGameEnded)
+            return;
 
-    waveUI.UpdateWaveText(CurrentStage, maxStage);
-    waveUI.SetWaveState();
+        waveUI.UpdateWaveText(CurrentStage, maxStage);
+        waveUI.SetWaveState();
 
-    Debug.Log($"{CurrentStage} 웨이브 시작");
-    StartCoroutine(waveSpawner.SpawnWave(CurrentStage));
+        Debug.Log($"{CurrentStage} 웨이브 시작");
+        StartCoroutine(waveSpawner.SpawnWave(CurrentStage));
     }
 
     private void StartPrepareTime()
     {
-    if (isGameEnded)
-        return;
+        if (isGameEnded)
+            return;
 
-    if (prepareCoroutine != null)
-        return;
+        if (prepareCoroutine != null)
+            return;
 
-    prepareCoroutine = StartCoroutine(PrepareRoutine());
+        prepareCoroutine = StartCoroutine(PrepareRoutine());
     }
 
     private IEnumerator PrepareRoutine()
-{
-    Debug.Log("정비 시간 시작");
-
-    waveUI.SetBreakState();
-
-    yield return new WaitForSeconds(prepareTime);
-
-    prepareCoroutine = null;
-
-    if (CurrentStage >= maxStage)
     {
-        GameClear();
-        yield break;
-    }
+        Debug.Log("정비 시간 시작");
 
-    CurrentStage++;
-    StartWave();
-}
+        waveUI.SetBreakState();
+
+        yield return new WaitForSeconds(prepareTime);
+
+        prepareCoroutine = null;
+
+        if (CurrentStage >= maxStage)
+        {
+            GameClear();
+            yield break;
+        }
+
+        CurrentStage++;
+        StartWave();
+    }
 
     private void GameClear()
     {
         EndGame();
-        GameUIManager.Instance.ShowGameClear();
-    }
 
-    
+        if (gameUIManager != null)
+        {
+            gameUIManager.ShowGameClear();
+        }
+    }
 }

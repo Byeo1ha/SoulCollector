@@ -2,22 +2,16 @@ using UnityEngine;
 
 public class PlayerBase : MonoBehaviour
 {
-    public static PlayerBase Instance { get; private set; }
-
     [SerializeField] private float maxHp = 1000f;
     [SerializeField] private BaseHpUI baseHpUI;
+
+    [SerializeField] private WaveManager waveManager;
+    [SerializeField] private GameUIManager gameUIManager;
 
     public float CurrentHp { get; private set; }
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
         CurrentHp = maxHp;
     }
 
@@ -44,7 +38,14 @@ public class PlayerBase : MonoBehaviour
 
     private void GameOver()
     {
-        WaveManager.Instance.EndGame();
-        GameUIManager.Instance.ShowGameOver();
+        if (waveManager != null)
+        {
+            waveManager.EndGame();
+        }
+
+        if (gameUIManager != null)
+        {
+            gameUIManager.ShowGameOver();
+        }
     }
 }
