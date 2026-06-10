@@ -376,7 +376,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDie
   enemyData: {fileID: 11400000, guid: 4cfa719897906f14db4d423a16f57bbc, type: 2}
-  deathDelay: 2.5
+  playerBase: {fileID: 0}
+  currencyManager: {fileID: 0}
+  waveManager: {fileID: 0}
+  deathDelay: 3
 --- !u!114 &1746290287786995473
 MonoBehaviour:
   m_ObjectHideFlags: 0

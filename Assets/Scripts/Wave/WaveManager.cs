@@ -10,7 +10,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private float prepareTime = 30f;
     [SerializeField] private int maxStage = 20;
 
-    public int CurrentStage { get; private set; } = 1;
+    public int CurrentStage { get; private set; } = 20;
     public bool IsGameEnded => isGameEnded;
 
     private int aliveEnemyCount;
@@ -29,24 +29,42 @@ public class WaveManager : MonoBehaviour
     }
 
     public void UnregisterEnemy()
-    {
-        aliveEnemyCount--;
+{
+    aliveEnemyCount--;
 
-        if (aliveEnemyCount <= 0 && !isSpawning)
-        {
-            StartPrepareTime();
-        }
+    if (aliveEnemyCount > 0)
+        return;
+
+    if (isSpawning)
+        return;
+
+    if (CurrentStage >= maxStage)
+    {
+        GameClear();
+        return;
     }
+
+    StartPrepareTime();
+}
 
     public void SetSpawningState(bool value)
-    {
-        isSpawning = value;
+{
+    isSpawning = value;
 
-        if (!isSpawning && aliveEnemyCount <= 0)
-        {
-            StartPrepareTime();
-        }
+    if (isSpawning)
+        return;
+
+    if (aliveEnemyCount > 0)
+        return;
+
+    if (CurrentStage >= maxStage)
+    {
+        GameClear();
+        return;
     }
+
+    StartPrepareTime();
+}
 
     public void EndGame()
     {
