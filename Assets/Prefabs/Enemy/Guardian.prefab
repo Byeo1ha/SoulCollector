@@ -264,6 +264,8 @@ GameObject:
   - component: {fileID: 3927690439156126831}
   - component: {fileID: 1746290287786995473}
   - component: {fileID: 4006900893169803185}
+  - component: {fileID: -7661110421041583982}
+  - component: {fileID: -6029187951395572516}
   m_Layer: 8
   m_Name: Guardian
   m_TagString: Enemy
@@ -408,6 +410,33 @@ MonoBehaviour:
   skillInterval: 5
   stunDuration: 2
   stunCount: 2
+--- !u!114 &-7661110421041583982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260904894312787518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b51b60a50c3f69d4eaf3dab071896b55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SortingLayerRenderer
+  sortPoint: {fileID: 0}
+  orderOffset: 0
+--- !u!210 &-6029187951395572516
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260904894312787518}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
 --- !u!1 &1293573573016662235
 GameObject:
   m_ObjectHideFlags: 0

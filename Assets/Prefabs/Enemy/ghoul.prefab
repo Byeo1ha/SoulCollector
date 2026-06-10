@@ -825,6 +825,8 @@ GameObject:
   - component: {fileID: -3376265077490789036}
   - component: {fileID: 8122598762802249649}
   - component: {fileID: 6433077094444509012}
+  - component: {fileID: 3286383560194303683}
+  - component: {fileID: -4297188761164983577}
   m_Layer: 8
   m_Name: ghoul
   m_TagString: Enemy
@@ -937,6 +939,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDie
   enemyData: {fileID: 11400000, guid: 0cf636c664b8cd64e98a8971546799a9, type: 2}
+  playerBase: {fileID: 0}
+  currencyManager: {fileID: 0}
+  waveManager: {fileID: 0}
   deathDelay: 2.5
 --- !u!114 &6433077094444509012
 MonoBehaviour:
@@ -951,6 +956,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
   enemyData: {fileID: 11400000, guid: 0cf636c664b8cd64e98a8971546799a9, type: 2}
+--- !u!114 &3286383560194303683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4196984736036690452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b51b60a50c3f69d4eaf3dab071896b55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SortingLayerRenderer
+  sortPoint: {fileID: 0}
+  orderOffset: 0
+--- !u!210 &-4297188761164983577
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4196984736036690452}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
 --- !u!1 &5240320940768667117
 GameObject:
   m_ObjectHideFlags: 0

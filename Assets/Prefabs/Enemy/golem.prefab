@@ -425,6 +425,8 @@ GameObject:
   - component: {fileID: -1706246504608475207}
   - component: {fileID: -9148588048339010089}
   - component: {fileID: 2496720273201667786}
+  - component: {fileID: -6529454911598250595}
+  - component: {fileID: -4079273528376372328}
   m_Layer: 8
   m_Name: golem
   m_TagString: Enemy
@@ -537,6 +539,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDie
   enemyData: {fileID: 11400000, guid: f4ce55e064ecb804aa699f53233c8148, type: 2}
+  playerBase: {fileID: 0}
+  currencyManager: {fileID: 0}
+  waveManager: {fileID: 0}
   deathDelay: 2
 --- !u!114 &2496720273201667786
 MonoBehaviour:
@@ -551,6 +556,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
   enemyData: {fileID: 11400000, guid: f4ce55e064ecb804aa699f53233c8148, type: 2}
+--- !u!114 &-6529454911598250595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2042954517613725653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b51b60a50c3f69d4eaf3dab071896b55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SortingLayerRenderer
+  sortPoint: {fileID: 0}
+  orderOffset: 0
+--- !u!210 &-4079273528376372328
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2042954517613725653}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
 --- !u!1 &2966058471372651551
 GameObject:
   m_ObjectHideFlags: 0
