@@ -826,7 +826,7 @@ GameObject:
   - component: {fileID: 8122598762802249649}
   - component: {fileID: 6433077094444509012}
   m_Layer: 8
-  m_Name: Ghoul
+  m_Name: ghoul
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -841,7 +841,7 @@ Transform:
   m_GameObject: {fileID: 4196984736036690452}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -12.11, y: 5.39, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -905,7 +905,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -937,7 +937,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDie
   enemyData: {fileID: 11400000, guid: 0cf636c664b8cd64e98a8971546799a9, type: 2}
-  deathDelay: 3
+  deathDelay: 2.5
 --- !u!114 &6433077094444509012
 MonoBehaviour:
   m_ObjectHideFlags: 0

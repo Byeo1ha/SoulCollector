@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 985839584414603040}
   - component: {fileID: 3605810557489401520}
   - component: {fileID: 66894182514132173}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: soul_center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7753572908264138638}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: bone_9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,7 +153,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 835030575163401121}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: bone_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,7 +185,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8247431799525418068}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: bone_11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,7 +216,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5441319620729736705}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: bone_8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -250,7 +250,7 @@ GameObject:
   - component: {fileID: 5530534316537564666}
   - component: {fileID: 1467508245349665045}
   - component: {fileID: 1924401784252955659}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: soul_back_f_hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -361,7 +361,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7651954195234058586}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: bone_12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -394,7 +394,7 @@ GameObject:
   - component: {fileID: 8022934524566220162}
   - component: {fileID: 5113810777341486790}
   - component: {fileID: 433066911420366320}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: soul_head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -505,7 +505,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2267964247020764663}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: bone_13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -543,7 +543,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5351215903186390907}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: bone_7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -576,7 +576,7 @@ GameObject:
   - component: {fileID: 535476212662307303}
   - component: {fileID: 8965730703821196644}
   - component: {fileID: 7903618185860862270}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: soul_jaw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -687,7 +687,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2625035754440142218}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: bone_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -720,7 +720,7 @@ GameObject:
   - component: {fileID: 320379827972397729}
   - component: {fileID: 1877917729742597155}
   - component: {fileID: 3129658744174846997}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: souleater
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -843,7 +843,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5011640042364403760}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: bone_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -875,7 +875,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7701578367692361518}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: bone_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -912,7 +912,7 @@ GameObject:
   - component: {fileID: 817369929266282452}
   - component: {fileID: 911696596264523722}
   m_Layer: 8
-  m_Name: Souleater
+  m_Name: souleater
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -927,7 +927,7 @@ Transform:
   m_GameObject: {fileID: 6815266073754747142}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.64271, y: 1.69286, z: 0}
+  m_LocalPosition: {x: -13.12, y: 7.66, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -991,7 +991,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -1023,7 +1023,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDie
   enemyData: {fileID: 11400000, guid: 7f37feb6d93030647811e9605483a946, type: 2}
-  deathDelay: 3
+  deathDelay: 2.5
 --- !u!114 &911696596264523722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1046,7 +1046,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7962638753604516640}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: bone_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1081,7 +1081,7 @@ GameObject:
   - component: {fileID: 3701899290610343310}
   - component: {fileID: 6024641042293148558}
   - component: {fileID: 7224854616795107861}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: soul_tail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1196,7 +1196,7 @@ GameObject:
   - component: {fileID: 7316562245222899510}
   - component: {fileID: 8486254108191417486}
   - component: {fileID: 1181975541824780139}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: soul_front_b_downhand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1309,7 +1309,7 @@ GameObject:
   - component: {fileID: 8475456604726361623}
   - component: {fileID: 2960084759860515864}
   - component: {fileID: 7773844316999869978}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: soul_front_b_uphand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1423,7 +1423,7 @@ GameObject:
   - component: {fileID: 8270878517171560264}
   - component: {fileID: 3196140258252886498}
   - component: {fileID: 4253325961807233178}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: soul_back_b_hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1536,7 +1536,7 @@ GameObject:
   - component: {fileID: 2354916151905952378}
   - component: {fileID: 998228786664238402}
   - component: {fileID: 4319708475053667854}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: soul_front_f_downhand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1647,7 +1647,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7642531934067679701}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: bone_10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1678,7 +1678,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5241802160103473574}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: bone_14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1711,7 +1711,7 @@ GameObject:
   - component: {fileID: 4223274306396911040}
   - component: {fileID: 3573292852688378622}
   - component: {fileID: 1192925136303424}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: soul_front_f_uphand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1822,7 +1822,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3385830697750851004}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: bone_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}

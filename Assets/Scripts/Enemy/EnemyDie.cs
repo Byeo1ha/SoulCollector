@@ -25,7 +25,7 @@ public class EnemyDie : MonoBehaviour
     {
         enemyHealth = GetComponent<EnemyHealth>();
         enemyMovement = GetComponent<EnemyMovement>();
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator > ();
 
         originalTag = gameObject.tag;
         originalLayer = gameObject.layer;

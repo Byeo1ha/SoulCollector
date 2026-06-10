@@ -42,13 +42,20 @@ public class WaveSpawner : MonoBehaviour
         GameObject enemy = spawnPoint.SpawnEnemy(enemyPool);
 
         if (enemy == null)
-        return;
+            return;
 
         EnemyHealth health = enemy.GetComponent<EnemyHealth>();
 
         if (health != null)
         {
-        health.SetHpMultiplier(hpMultiplier);
+            health.SetHpMultiplier(hpMultiplier);
+        }
+
+        DropperSkill dropperSkill = enemy.GetComponent<DropperSkill>();
+
+        if (dropperSkill != null)
+        {
+            dropperSkill.Initialize(ghoulPool);
         }
 
         WaveManager.Instance.RegisterEnemy();
