@@ -5,7 +5,8 @@ using UnityEngine;
 public class LaserProjectile : MonoBehaviour
 {
     [SerializeField] private float activeTime = 0.1f;
-
+    [SerializeField] private LaserHitEffectPool hitEffectPool;
+    
     private readonly List<EnemyHealth> damagedEnemies = new List<EnemyHealth>();
 
     private float damage;
@@ -13,7 +14,7 @@ public class LaserProjectile : MonoBehaviour
     private void OnEnable()
     {
         damagedEnemies.Clear();
-        StartCoroutine(DisableAfterDelay());
+        //StartCoroutine(DisableAfterDelay());
     }
 
     private void OnDisable()
@@ -47,12 +48,37 @@ public class LaserProjectile : MonoBehaviour
         if (damagedEnemies.Contains(enemyHealth)) return;
 
         enemyHealth.TakeDamage(damage);
+        Debug.Log(damage + " 피해 줌!");
+
+        Vector3 hitPosition = collision.transform.position;
+
+        PlayHitEffect(hitPosition);
         damagedEnemies.Add(enemyHealth);
     }
 
-    private IEnumerator DisableAfterDelay()
+    /*private IEnumerator DisableAfterDelay()
     {
         yield return new WaitForSeconds(activeTime);
+        gameObject.SetActive(false);
+    }*/
+
+    private void PlayHitEffect(Vector3 position)
+    {
+        Debug.Log("오긴 왔는데");
+        if (hitEffectPool == null) return;
+
+
+        Debug.Log("실행이 되네?");
+        GameObject hitEffect = hitEffectPool.GetEffect();
+
+        if (hitEffect == null) return;
+
+        hitEffect.transform.position = position;
+        hitEffect.SetActive(true);
+    }
+
+    public void OnDeActive()
+    {
         gameObject.SetActive(false);
     }
 }

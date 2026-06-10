@@ -9,13 +9,18 @@ public class TurretLaser : TurretBase
 
     [SerializeField] private bool isFind = true;
 
+    private ITurretAttackAnim _turretAttackAnim;
     private TurretStat turretStat;
     private Transform _currentTarget;
+
+    private float _originalScaleXValue;
     private float _nextFireTime = 0f;
     private bool _isAttackWaiting = false;
 
     private void Awake()
     {
+        _turretAttackAnim = GetComponentInChildren<ITurretAttackAnim>();
+        _originalScaleXValue = transform.localScale.x;
         turretStat = turretData.RuntimeStat;
     }
 
@@ -45,8 +50,11 @@ public class TurretLaser : TurretBase
         if (Time.time < _nextFireTime) return;
         if (_isAttackWaiting) return;
 
+        LookAtTarget(target);
+
         _nextFireTime = Time.time + turretStat.cooldown;
 
+        _turretAttackAnim.OnAttackAnimation();
         StartCoroutine(AttackDelayCoroutine(target));
     }
 
@@ -61,8 +69,15 @@ public class TurretLaser : TurretBase
 
         if (!IsTargetValid(target, transform.position, turretStat.attackRange))
         {
-            _isAttackWaiting = false;
-            yield break;
+            target = FindFirstTarget(transform.position, turretStat.attackRange);
+
+            if (target == null)
+            {
+                _isAttackWaiting = false;
+                yield break;
+            }
+
+            LookAtTarget(target);
         }
 
         ShootLaser(target);
@@ -92,5 +107,19 @@ public class TurretLaser : TurretBase
         }
 
         laser.SetActive(true);
+    }
+
+    private void LookAtTarget(Transform target)
+    {
+        Vector3 currentPosition = transform.position;
+
+        if (currentPosition.x < target.position.x)
+        {
+            transform.localScale = new Vector3(_originalScaleXValue, transform.localScale.y, transform.localScale.z);
+        }
+        else
+        {
+            transform.localScale = new Vector3(_originalScaleXValue * (-1), transform.localScale.y, transform.localScale.z);
+        }
     }
 }

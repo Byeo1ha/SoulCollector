@@ -21,7 +21,8 @@ public class EnemyHealth : MonoBehaviour
 
         if (currentHp <= 0f)
         {
-            enemyDie.Die();
+            gameObject.SetActive(false); //<< 머지할 때 지울 것
+            //enemyDie.Die(); << 머지할 때 되돌릴 것
         }
     }
 
