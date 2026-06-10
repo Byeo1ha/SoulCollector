@@ -65,22 +65,33 @@ public class EnemyMovement : MonoBehaviour
     }
 
     private void Move()
+{
+    if (currentIndex >= waypoints.Length)
     {
-        if (currentIndex >= waypoints.Length)
-        {
-            enemyDie.ReachGoal();
-            return;
-        }
-
-        transform.position = Vector3.MoveTowards(
-            transform.position,
-            waypoints[currentIndex].position,
-            enemyData.moveSpeed * speedMultiplier * Time.deltaTime
-        );
-
-        if (Vector3.Distance(transform.position, waypoints[currentIndex].position) < 0.01f)
-        {
-            currentIndex++;
-        }
+        enemyDie.ReachGoal();
+        return;
     }
+
+    Transform targetWaypoint = waypoints[currentIndex];
+
+    Vector3 direction = targetWaypoint.position - transform.position;
+
+    if (Mathf.Abs(direction.x) > 0.01f)
+    {
+        Vector3 scale = transform.localScale;
+        scale.x = direction.x > 0 ? -1f : 1f;
+        transform.localScale = scale;
+    }
+
+    transform.position = Vector3.MoveTowards(
+        transform.position,
+        targetWaypoint.position,
+        enemyData.moveSpeed * speedMultiplier * Time.deltaTime
+    );
+
+    if (Vector3.Distance(transform.position, targetWaypoint.position) < 0.01f)
+    {
+        currentIndex++;
+    }
+}
 }

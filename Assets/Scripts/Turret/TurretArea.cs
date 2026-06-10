@@ -79,6 +79,12 @@ public class TurretArea : TurretBase
             LookAtTarget(target);
         }
 
+        if (!isFind)
+        {
+            _isAttackWaiting = false;
+            yield break;
+        }
+        
         ApplyDamage(target);
         _isAttackWaiting = false;
     }
@@ -118,5 +124,10 @@ public class TurretArea : TurretBase
 
         hitEffect.transform.position = position;
         hitEffect.SetActive(true);
+    }
+
+    public void SetFind(bool value)
+    {
+        isFind = value;
     }
 }

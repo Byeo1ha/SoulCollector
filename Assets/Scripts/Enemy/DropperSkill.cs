@@ -1,11 +1,15 @@
+using System.Collections;
 using UnityEngine;
 
 public class DropperSkill : MonoBehaviour
 {
-    [SerializeField] private EnemyPool ghoulPool;
     [SerializeField] private int summonCount = 7;
+    [SerializeField] private float summonInterval = 0.4f;
 
+    private EnemyPool ghoulPool;
+    private WaveManager waveManager;
     private EnemyMovement dropperMovement;
+
     private bool hasSummoned;
 
     private void Awake()
@@ -18,22 +22,40 @@ public class DropperSkill : MonoBehaviour
         hasSummoned = false;
     }
 
+    public void Initialize(EnemyPool pool, WaveManager manager)
+    {
+        ghoulPool = pool;
+        waveManager = manager;
+    }
+
     public void TrySummon(float currentHp, float maxHp)
     {
         if (hasSummoned)
             return;
 
+        if (ghoulPool == null)
+        {
+            Debug.LogWarning("GhoulPool이 없습니다.");
+            return;
+        }
+
+        if (waveManager == null)
+        {
+            Debug.LogWarning("WaveManager가 없습니다.");
+            return;
+        }
+
         if (currentHp > maxHp * 0.5f)
             return;
 
         hasSummoned = true;
-        SummonGhouls();
+        StartCoroutine(SummonGhoulsRoutine());
     }
 
-    private void SummonGhouls()
+    private IEnumerator SummonGhoulsRoutine()
     {
         if (dropperMovement == null)
-            return;
+            yield break;
 
         Transform[] waypoints = dropperMovement.GetWaypoints();
         int startIndex = dropperMovement.GetCurrentIndex();
@@ -42,28 +64,30 @@ public class DropperSkill : MonoBehaviour
         {
             GameObject ghoul = ghoulPool.GetEnemy();
 
-            if (ghoul == null)
-                continue;
-
-            ghoul.transform.position = transform.position;
-
-            EnemyMovement ghoulMovement = ghoul.GetComponent<EnemyMovement>();
-
-            if (ghoulMovement != null)
+            if (ghoul != null)
             {
-                ghoulMovement.SetPathFromCurrentPosition(waypoints, startIndex);
+                ghoul.transform.position = transform.position;
+
+                EnemyMovement ghoulMovement = ghoul.GetComponent<EnemyMovement>();
+
+                if (ghoulMovement != null)
+                {
+                    ghoulMovement.SetPathFromCurrentPosition(waypoints, startIndex);
+                }
+
+                EnemyDie enemyDie = ghoul.GetComponent<EnemyDie>();
+
+                if (enemyDie != null)
+                {
+                    enemyDie.SetRewardEnabled(false);
+                }
+
+                ghoul.SetActive(true);
+
+                waveManager.RegisterEnemy();
             }
 
-            EnemyDie enemyDie = ghoul.GetComponent<EnemyDie>();
-
-            if (enemyDie != null)
-            {
-                enemyDie.SetRewardEnabled(false);
-            }
-
-            ghoul.SetActive(true);
-
-            WaveManager.Instance.RegisterEnemy();
+            yield return new WaitForSeconds(summonInterval);
         }
     }
 }

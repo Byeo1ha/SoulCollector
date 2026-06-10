@@ -95,6 +95,12 @@ public class TurretProjectile : TurretBase
             LookAtTarget(target);
         }
 
+        if (!isFind)
+        {
+            _isAttackWaiting = false;
+            yield break;
+        }
+
         ShootBullet(target);
         _isAttackWaiting = false;
     }
@@ -138,5 +144,10 @@ public class TurretProjectile : TurretBase
         }
 
         return null;
+    }
+
+    public void SetFind(bool value)
+    {
+        isFind = value;
     }
 }
