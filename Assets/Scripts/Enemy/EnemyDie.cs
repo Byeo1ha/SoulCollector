@@ -5,12 +5,16 @@ using UnityEngine;
 public class EnemyDie : MonoBehaviour
 {
     [SerializeField] private EnemyData enemyData;
-    [SerializeField] private float deathDelay = 0.8f;
+    [SerializeField] private PlayerBase playerBase;
+    [SerializeField] private CurrencyManager currencyManager;
+    [SerializeField] private WaveManager waveManager;
 
+    [SerializeField] private float deathDelay = 0.8f;
+    
+    private AudioSource audioSource;
     private EnemyHealth enemyHealth;
     private EnemyMovement enemyMovement;
     private Animator animator;
-    private Collider2D[] colliders;
     private SpriteRenderer[] spriteRenderers;
     private string originalTag;
     private int originalLayer;
@@ -18,62 +22,60 @@ public class EnemyDie : MonoBehaviour
     private bool isDead;
     private bool rewardEnabled = true;
 
+    private const int EnemyDieLayer = 10;
 
     private static readonly int DieHash = Animator.StringToHash("Die");
 
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         enemyHealth = GetComponent<EnemyHealth>();
         enemyMovement = GetComponent<EnemyMovement>();
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
 
         originalTag = gameObject.tag;
         originalLayer = gameObject.layer;
 
-        colliders = GetComponentsInChildren<Collider2D>(true);
         spriteRenderers = GetComponentsInChildren<SpriteRenderer>(true);
     }
 
     private void OnEnable()
-{
-    rewardEnabled = true;
-    isDead = false;
+    {
+        rewardEnabled = true;
+        isDead = false;
 
-    gameObject.tag = originalTag;
-    gameObject.layer = originalLayer;
+        gameObject.tag = originalTag;
+        gameObject.layer = originalLayer;
 
-    ResetAnimator();
-    ResetSprites();
-    SetColliders(true);
+        ResetAnimator();
+        ResetSprites();
 
-    if (enemyMovement != null)
-        enemyMovement.enabled = true;
-}
+        if (enemyMovement != null)
+            enemyMovement.enabled = true;
+    }
 
     public void SetRewardEnabled(bool value)
-{
-    rewardEnabled = value;
-}
+    {
+        rewardEnabled = value;
+    }
 
     public void Die()
-{
-    if (isDead)
-        return;
+    {
+        if (isDead)
+            return;
 
-    isDead = true;
+        isDead = true;
 
-    GiveReward();
+        audioSource.Play();
+        gameObject.layer = EnemyDieLayer;
 
-    if (enemyMovement != null)
-        enemyMovement.enabled = false;
+        GiveReward();
 
-    SetColliders(false);
+        if (enemyMovement != null)
+            enemyMovement.enabled = false;
 
-    gameObject.tag = "Untagged";
-    gameObject.layer = LayerMask.NameToLayer("Default");
-
-    StartCoroutine(DieRoutine());
-}
+        StartCoroutine(DieRoutine());
+    }
 
     public void ReachGoal()
     {
@@ -82,27 +84,29 @@ public class EnemyDie : MonoBehaviour
 
         isDead = true;
 
-        SetColliders(false);
+        if (playerBase != null)
+        {
+            playerBase.TakeDamage(enemyHealth.MaxHp);
+        }
 
-        PlayerBase.Instance.TakeDamage(enemyHealth.MaxHp);
         RemoveEnemy();
     }
 
     private IEnumerator DieRoutine()
     {
-    if (animator != null)
-        animator.SetTrigger(DieHash);
+        if (animator != null)
+            animator.SetTrigger(DieHash);
 
-    yield return new WaitForSeconds(deathDelay);
+        yield return new WaitForSeconds(deathDelay);
 
-    if (animator != null)
-    {
-        animator.ResetTrigger(DieHash);
-        animator.Play("Walk", 0, 0f);
-        animator.Update(0f);
-    }
+        if (animator != null)
+        {
+            animator.ResetTrigger(DieHash);
+            animator.Play("Walk", 0, 0f);
+            animator.Update(0f);
+        }
 
-    ResetSprites();
+        ResetSprites();
 
         RemoveEnemy();
     }
@@ -136,33 +140,36 @@ public class EnemyDie : MonoBehaviour
         }
     }
 
-    private void SetColliders(bool value)
+    private void GiveReward()       
     {
-        foreach (Collider2D col in colliders)
-        {
-            if (col == null)
-                continue;
+        if (!rewardEnabled)
+            return;
 
-            col.enabled = value;
-        }
+        if (currencyManager == null)
+            return;
+
+        currencyManager.AddSoul(enemyData.crystalReward);
     }
-
-    private void GiveReward()
-{
-    if (!rewardEnabled)
-        return;
-
-    if (CurrencyManager.Instance == null)
-        return;
-
-    CurrencyManager.Instance.AddSoul(enemyData.crystalReward);
-}
 
     private void RemoveEnemy()
     {
         StopAllCoroutines();
 
-        WaveManager.Instance.UnregisterEnemy();
+        if (waveManager != null)
+        {
+            waveManager.UnregisterEnemy();
+        }
+
         gameObject.SetActive(false);
     }
+
+            public void Initialize(
+            PlayerBase playerBase,
+            CurrencyManager currencyManager,
+            WaveManager waveManager)
+        {
+            this.playerBase = playerBase;
+            this.currencyManager = currencyManager;
+            this.waveManager = waveManager;
+        }
 }

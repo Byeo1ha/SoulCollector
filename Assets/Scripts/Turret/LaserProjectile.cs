@@ -1,10 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class LaserProjectile : MonoBehaviour
 {
-    [SerializeField] private float activeTime = 0.1f;
     [SerializeField] private LaserHitEffectPool hitEffectPool;
     
     private readonly List<EnemyHealth> damagedEnemies = new List<EnemyHealth>();

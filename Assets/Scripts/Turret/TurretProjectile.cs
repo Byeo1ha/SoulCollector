@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(TurretSound))]
 public class TurretProjectile : TurretBase
 {
     [SerializeField] private TurretData turretData;
@@ -14,16 +15,21 @@ public class TurretProjectile : TurretBase
     private readonly List<GameObject> bulletPool = new List<GameObject>();
 
     private ITurretAttackAnim _turretAttackAnim;
+    private TurretSound turretSound;
     private TurretStat turretStat;
     private Transform _currentTarget;
+    
 
     private float _originalScaleXValue;
     private float _nextFireTime = 0f;
     private bool _isAttackWaiting = false;
 
+    public override int Cost => turretStat.cost;
+
     private void Awake()
     {
-        _turretAttackAnim = GetComponentInChildren<ITurretAttackAnim>();
+        _turretAttackAnim = GetComponentInChildren<ITurretAttackAnim>();   
+        turretSound = GetComponent<TurretSound>();  
         _originalScaleXValue = transform.localScale.x;
         turretStat = turretData.RuntimeStat;
         CreateBulletPool();
@@ -46,6 +52,8 @@ public class TurretProjectile : TurretBase
         for (int i = 0; i < maxBullets; i++)
         {
             GameObject bullet = Instantiate(bulletPrefab, transform);
+            Bullet bulletComponent = bullet.GetComponent<Bullet>();
+            bulletComponent.SetPoolParent(transform);
             bullet.SetActive(false);
             bulletPool.Add(bullet);
         }
@@ -95,7 +103,14 @@ public class TurretProjectile : TurretBase
             LookAtTarget(target);
         }
 
+        if (!isFind)
+        {
+            _isAttackWaiting = false;
+            yield break;
+        }
+
         ShootBullet(target);
+        turretSound.PlaySoundAttack();
         _isAttackWaiting = false;
     }
 
@@ -105,6 +120,7 @@ public class TurretProjectile : TurretBase
 
         if (bullet == null) return;
 
+        bullet.transform.SetParent(null, true);
         bullet.transform.position = shootPoint.position;
 
         Bullet bulletComponent = bullet.GetComponent<Bullet>();
@@ -138,5 +154,10 @@ public class TurretProjectile : TurretBase
         }
 
         return null;
+    }
+
+    public void SetFind(bool value)
+    {
+        isFind = value;
     }
 }

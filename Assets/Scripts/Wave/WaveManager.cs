@@ -3,47 +3,49 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-    public static WaveManager Instance { get; private set; }
-
     [SerializeField] private WaveSpawner waveSpawner;
     [SerializeField] private WaveUI waveUI;
+    [SerializeField] private GameUIManager gameUIManager;
+
     [SerializeField] private float prepareTime = 30f;
     [SerializeField] private int maxStage = 20;
 
-    public int CurrentStage { get; private set; } = 1;
+    [SerializeField] private AudioClip clearAudio;
+    [SerializeField] private AudioClip failAudio;
+    [SerializeField] private TurretBuildController turretBuildController;
 
+    public int CurrentStage { get; private set; } = 1;
+    public bool IsGameEnded => isGameEnded;
+
+    private AudioSource audioSource;
     private int aliveEnemyCount;
     private bool isSpawning;
     private Coroutine prepareCoroutine;
     private bool isGameEnded;
+    private bool hasStartedFirstWave;
 
-    public bool IsGameEnded => isGameEnded;
-
-    public void EndGame()
+    private void PlaySound(string sound)
     {
-    isGameEnded = true;
-
-    if (prepareCoroutine != null)
-    {
-        StopCoroutine(prepareCoroutine);
-        prepareCoroutine = null;
-    }
+        switch (sound)
+        {
+            case "Clear":
+                audioSource.clip = clearAudio;
+                break;
+            case "Fail":
+                audioSource.clip = failAudio;
+                break;
+        }
+        audioSource.Play();
     }
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
     {
-        StartWave();
+        StartInitialPrepareTime();
     }
 
     public void RegisterEnemy()
@@ -52,91 +54,151 @@ public class WaveManager : MonoBehaviour
     }
 
     public void UnregisterEnemy()
-    {
-        aliveEnemyCount--;
+{
+    aliveEnemyCount--;
 
-        if (aliveEnemyCount <= 0 && !isSpawning)
-        {
-            StartPrepareTime();
-        }
+    if (aliveEnemyCount > 0)
+        return;
+
+    if (isSpawning)
+        return;
+
+    if (CurrentStage >= maxStage)
+    {
+        GameClear();
+        return;
     }
+    
+    PlaySound("Clear");
+    StartPrepareTime();
+}
 
     public void SetSpawningState(bool value)
-    {
-        isSpawning = value;
+{
+    isSpawning = value;
 
-        if (!isSpawning && aliveEnemyCount <= 0)
+    if (isSpawning)
+        return;
+
+    if (aliveEnemyCount > 0)
+        return;
+
+    if (CurrentStage >= maxStage)
+    {
+        GameClear();
+        return;
+    }
+
+    StartPrepareTime();
+}
+
+    public void EndGame()
+    {
+        isGameEnded = true;
+
+        PlaySound("Fail");
+        if (prepareCoroutine != null)
         {
-            StartPrepareTime();
+            StopCoroutine(prepareCoroutine);
+            prepareCoroutine = null;
         }
     }
 
     public void StartNextWaveImmediately()
-{
-    if (prepareCoroutine == null)
-        return;
-
-    StopCoroutine(prepareCoroutine);
-    prepareCoroutine = null;
-
-    if (CurrentStage >= maxStage)
     {
-        GameClear();
-        return;
-    }
+        if (prepareCoroutine == null)
+            return;
 
-    CurrentStage++;
-    StartWave();
-}
+        if (turretBuildController.isBuild)
+            turretBuildController.BuildToggle();
+        
+        StopCoroutine(prepareCoroutine);
+        prepareCoroutine = null;
+
+        if (CurrentStage >= maxStage)
+        {
+            GameClear();
+            return;
+        }
+
+        if (hasStartedFirstWave)
+        {
+            CurrentStage++;
+        }
+
+        StartWave();
+    }
 
     private void StartWave()
     {
-    if (isGameEnded)
-        return;
+        if (isGameEnded)
+            return;
 
-    waveUI.UpdateWaveText(CurrentStage, maxStage);
-    waveUI.SetWaveState();
+        hasStartedFirstWave = true;
 
-    Debug.Log($"{CurrentStage} 웨이브 시작");
-    StartCoroutine(waveSpawner.SpawnWave(CurrentStage));
+        waveUI.UpdateWaveText(CurrentStage, maxStage);
+        waveUI.SetWaveState();
+
+        Debug.Log($"{CurrentStage} 웨이브 시작");
+        StartCoroutine(waveSpawner.SpawnWave(CurrentStage));
     }
 
     private void StartPrepareTime()
     {
-    if (isGameEnded)
-        return;
+        if (isGameEnded)
+            return;
 
-    if (prepareCoroutine != null)
-        return;
+        if (prepareCoroutine != null)
+            return;
 
-    prepareCoroutine = StartCoroutine(PrepareRoutine());
+        prepareCoroutine = StartCoroutine(PrepareRoutine());
+    }
+
+    private void StartInitialPrepareTime()
+    {
+        waveUI.UpdateWaveText(CurrentStage, maxStage);
+        waveUI.SetBreakState();
+
+        prepareCoroutine = StartCoroutine(InitialPrepareRoutine());
+    }
+
+    private IEnumerator InitialPrepareRoutine()
+    {
+        Debug.Log("정비 시간 시작");
+
+        yield return new WaitForSeconds(prepareTime);
+
+        prepareCoroutine = null;
+        StartWave();
     }
 
     private IEnumerator PrepareRoutine()
-{
-    Debug.Log("정비 시간 시작");
-
-    waveUI.SetBreakState();
-
-    yield return new WaitForSeconds(prepareTime);
-
-    prepareCoroutine = null;
-
-    if (CurrentStage >= maxStage)
     {
-        GameClear();
-        yield break;
-    }
+        Debug.Log("정비 시간 시작");
 
-    CurrentStage++;
-    StartWave();
-}
+        waveUI.SetBreakState();
+
+        yield return new WaitForSeconds(prepareTime);
+
+        prepareCoroutine = null;
+
+        if (CurrentStage >= maxStage)
+        {
+            GameClear();
+            yield break;
+        }
+
+        CurrentStage++;
+        StartWave();
+    }
 
     private void GameClear()
     {
         EndGame();
-        GameUIManager.Instance.ShowGameClear();
-    }
 
-    
+        if (gameUIManager != null)
+        {
+            gameUIManager.ShowGameClear();
+        }
+    }
 }

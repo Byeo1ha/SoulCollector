@@ -2,22 +2,19 @@ using UnityEngine;
 
 public class PlayerBase : MonoBehaviour
 {
-    public static PlayerBase Instance { get; private set; }
-
     [SerializeField] private float maxHp = 1000f;
     [SerializeField] private BaseHpUI baseHpUI;
+
+    [SerializeField] private WaveManager waveManager;
+    [SerializeField] private GameUIManager gameUIManager;
+
+    private AudioSource audioSource;
 
     public float CurrentHp { get; private set; }
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
+        audioSource = GetComponent<AudioSource>();
         CurrentHp = maxHp;
     }
 
@@ -31,6 +28,7 @@ public class PlayerBase : MonoBehaviour
         if (damage <= 0f)
             return;
 
+        audioSource.Play();
         CurrentHp -= damage;
         CurrentHp = Mathf.Max(CurrentHp, 0f);
 
@@ -44,7 +42,14 @@ public class PlayerBase : MonoBehaviour
 
     private void GameOver()
     {
-        WaveManager.Instance.EndGame();
-        GameUIManager.Instance.ShowGameOver();
+        if (waveManager != null)
+        {
+            waveManager.EndGame();
+        }
+
+        if (gameUIManager != null)
+        {
+            gameUIManager.ShowGameOver();
+        }
     }
 }

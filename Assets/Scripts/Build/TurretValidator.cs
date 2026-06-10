@@ -31,4 +31,12 @@ public class TurretValidator : MonoBehaviour
         Collider2D hit = Physics2D.OverlapPoint(vec, turretLayer);
         return hit != null;
     }
+
+    public bool CanBuild(Vector2 vec)
+    {
+        if (!CanBuildZone(vec))
+            return false;
+
+        return !HasTurret(vec);
+    }
 }
