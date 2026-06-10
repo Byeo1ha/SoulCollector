@@ -10,7 +10,8 @@ public class EnemyDie : MonoBehaviour
     [SerializeField] private WaveManager waveManager;
 
     [SerializeField] private float deathDelay = 0.8f;
-
+    
+    private AudioSource audioSource;
     private EnemyHealth enemyHealth;
     private EnemyMovement enemyMovement;
     private Animator animator;
@@ -21,13 +22,13 @@ public class EnemyDie : MonoBehaviour
     private bool isDead;
     private bool rewardEnabled = true;
 
-    private const int EnemyLayer = 8;
     private const int EnemyDieLayer = 10;
 
     private static readonly int DieHash = Animator.StringToHash("Die");
 
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         enemyHealth = GetComponent<EnemyHealth>();
         enemyMovement = GetComponent<EnemyMovement>();
         animator = GetComponentInChildren<Animator>();
@@ -65,6 +66,7 @@ public class EnemyDie : MonoBehaviour
 
         isDead = true;
 
+        audioSource.Play();
         gameObject.layer = EnemyDieLayer;
 
         GiveReward();

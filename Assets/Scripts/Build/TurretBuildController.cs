@@ -8,6 +8,14 @@ public class TurretBuildController : MonoBehaviour
     private GridSnapper gridSnapper;
     private TurretBuildGuide turretBuildGuide;
 
+    [SerializeField] private SFXClick sfxClick;
+    [SerializeField] private CurrencyManager currencyManager;
+
+    [Header("설치 이펙트")]
+    [SerializeField] private ParticlePool beamBuildEffectPool;
+    [SerializeField] private ParticlePool gatlingBuildEffectPool;
+    [SerializeField] private ParticlePool sniperBuildEffectPool;
+
     [Header("메인 카메라")]
     [SerializeField] private Camera mainCam;
 
@@ -129,7 +137,58 @@ public class TurretBuildController : MonoBehaviour
             return;
         }
 
-        turret.transform.position = gridSnapper.GetSnappedPosition(mousePos);
+        TurretBase turretBase = turret.GetComponent<TurretBase>();
+
+        if (turretBase == null)
+        {
+            Debug.Log("TurretBase Missing");
+            return;
+        }
+
+        if (currencyManager == null)
+        {
+            Debug.Log("CurrencyManager Missing");
+            return;
+        }
+
+        if (!currencyManager.TrySpendSoul(turretBase.Cost))
+        {
+            Debug.Log("Not Enough Soul");
+            return;
+        }
+
+        Vector3 buildPosition = gridSnapper.GetSnappedPosition(mousePos);
+
+        turret.transform.position = buildPosition;
         turret.SetActive(true);
+        PlayBuildEffect(turretType, buildPosition);
+        sfxClick.PlaySoundClick();
+    }
+
+    private void PlayBuildEffect(TurretType type, Vector3 position)
+    {
+        ParticlePool particlePool = null;
+
+        switch (type)
+        {
+            case TurretType.Beam:
+                particlePool = beamBuildEffectPool;
+                break;
+            case TurretType.Gatling:
+                particlePool = gatlingBuildEffectPool;
+                break;
+            case TurretType.Sniper:
+                particlePool = sniperBuildEffectPool;
+                break;
+        }
+
+        if (particlePool == null) return;
+
+        GameObject particle = particlePool.GetPool();
+
+        if (particle == null) return;
+
+        particle.transform.position = position;
+        particle.SetActive(true);
     }
 }

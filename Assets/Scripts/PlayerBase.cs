@@ -8,10 +8,13 @@ public class PlayerBase : MonoBehaviour
     [SerializeField] private WaveManager waveManager;
     [SerializeField] private GameUIManager gameUIManager;
 
+    private AudioSource audioSource;
+
     public float CurrentHp { get; private set; }
 
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         CurrentHp = maxHp;
     }
 
@@ -25,6 +28,7 @@ public class PlayerBase : MonoBehaviour
         if (damage <= 0f)
             return;
 
+        audioSource.Play();
         CurrentHp -= damage;
         CurrentHp = Mathf.Max(CurrentHp, 0f);
 

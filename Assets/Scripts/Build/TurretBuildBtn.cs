@@ -3,20 +3,24 @@ using UnityEngine;
 public class TurretBuildBtn : MonoBehaviour
 {
     [SerializeField] private TurretBuildController turretBuildController;
+    [SerializeField] private SFXClick sfxClick;
 
     public void OnTurretBeamBtn()
     {
         SelectTurretType(TurretType.Beam);
+        sfxClick.PlaySoundClick();
     }
 
     public void OnTurretGatlingBtn()
     {
         SelectTurretType(TurretType.Gatling);
+        sfxClick.PlaySoundClick();
     }
 
     public void OnTurretSniperBtn()
     {
         SelectTurretType(TurretType.Sniper);
+        sfxClick.PlaySoundClick();
     }
 
     private void SelectTurretType(TurretType turretType)

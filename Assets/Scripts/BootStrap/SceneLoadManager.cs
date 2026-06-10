@@ -11,6 +11,8 @@ public class SceneLoadManager : MonoBehaviour
     private string _targetSceneName;
     private float _minLoadingTime;
 
+    private bool loadingCall = false;
+
     private void Awake()
     {
         if (Instance == null)
@@ -39,6 +41,13 @@ public class SceneLoadManager : MonoBehaviour
         operation.allowSceneActivation = false;
 
         yield return new WaitForSeconds(1.2f);
+
+        if (loadingCall) 
+        {
+            yield return new WaitForSeconds(1f);
+            loadingCall = false;
+        }
+
         operation.allowSceneActivation = true;
 
         while (!operation.isDone) yield return null;
@@ -50,6 +59,7 @@ public class SceneLoadManager : MonoBehaviour
     {
         if (FadeManager.Instance == null) return;
 
+        loadingCall = true;
         _targetSceneName = sceneName;
         _minLoadingTime = minLoadingTime;
 

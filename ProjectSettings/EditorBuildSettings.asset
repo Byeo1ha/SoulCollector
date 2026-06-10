@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Game/BootStrap.unity
     guid: f91280a746432c243bceb029c87a4010
   - enabled: 1
+    path: Assets/Scenes/Game/GamePlay.unity
+    guid: c3c77a321726ba444a3334c394d48553
+  - enabled: 1
     path: Assets/Scenes/Game/TitleScreen.unity
     guid: be25e323e81b1054ba486ac9c9e795a7
   - enabled: 1

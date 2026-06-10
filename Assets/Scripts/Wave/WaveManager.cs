@@ -10,14 +10,38 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private float prepareTime = 30f;
     [SerializeField] private int maxStage = 20;
 
+    [SerializeField] private AudioClip clearAudio;
+    [SerializeField] private AudioClip failAudio;
+    [SerializeField] private TurretBuildController turretBuildController;
+
     public int CurrentStage { get; private set; } = 1;
     public bool IsGameEnded => isGameEnded;
 
+    private AudioSource audioSource;
     private int aliveEnemyCount;
     private bool isSpawning;
     private Coroutine prepareCoroutine;
     private bool isGameEnded;
     private bool hasStartedFirstWave;
+
+    private void PlaySound(string sound)
+    {
+        switch (sound)
+        {
+            case "Clear":
+                audioSource.clip = clearAudio;
+                break;
+            case "Fail":
+                audioSource.clip = failAudio;
+                break;
+        }
+        audioSource.Play();
+    }
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     private void Start()
     {
@@ -44,7 +68,8 @@ public class WaveManager : MonoBehaviour
         GameClear();
         return;
     }
-
+    
+    PlaySound("Clear");
     StartPrepareTime();
 }
 
@@ -71,6 +96,7 @@ public class WaveManager : MonoBehaviour
     {
         isGameEnded = true;
 
+        PlaySound("Fail");
         if (prepareCoroutine != null)
         {
             StopCoroutine(prepareCoroutine);
@@ -83,6 +109,9 @@ public class WaveManager : MonoBehaviour
         if (prepareCoroutine == null)
             return;
 
+        if (turretBuildController.isBuild)
+            turretBuildController.BuildToggle();
+        
         StopCoroutine(prepareCoroutine);
         prepareCoroutine = null;
 

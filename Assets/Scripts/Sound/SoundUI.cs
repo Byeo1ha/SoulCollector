@@ -18,8 +18,8 @@ public class SoundUI : MonoBehaviour
         PlayerPrefs.SetFloat("bgmSound", bgmSound);
 
         if (bgmSound == -40f)
-            bgmMixer.SetFloat("BGM", -80);
+            bgmMixer.SetFloat("Master", -80);
         else
-            bgmMixer.SetFloat("BGM", bgmSound);
+            bgmMixer.SetFloat("Master", bgmSound);
     }
 }

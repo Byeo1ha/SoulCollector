@@ -755,7 +755,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f19be39a3fedb5458dab684eb75c55e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BootStrapManager
-  nextSceneName: TitleScreen
+  nextSceneName: GamePlay
   targetObj: {fileID: 2790937877607264950}
   loadingText: {fileID: 1643557028}
 --- !u!4 &1234785026

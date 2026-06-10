@@ -7,6 +7,8 @@ public abstract class TurretBase : MonoBehaviour
 
     private readonly List<Transform> targetsInRange = new List<Transform>();
 
+    public abstract int Cost { get; }
+
     protected abstract void TryAttack();
 
     protected virtual void OnDisable()

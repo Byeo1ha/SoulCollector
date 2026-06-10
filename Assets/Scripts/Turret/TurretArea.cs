@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(TurretSound))]
 public class TurretArea : TurretBase
 {
     [SerializeField] private TurretData turretData;
@@ -9,6 +10,7 @@ public class TurretArea : TurretBase
     [SerializeField] private bool isFind = true;
 
     private ITurretAttackAnim _turretAttackAnim;
+    private TurretSound turretSound;
     private TurretStat turretStat;
     private Transform _currentTarget;
 
@@ -16,9 +18,12 @@ public class TurretArea : TurretBase
     private float _nextFireTime = 0f;
     private bool _isAttackWaiting = false;
 
+    public override int Cost => turretStat.cost;
+
     private void Awake()
     {
         _turretAttackAnim = GetComponentInChildren<ITurretAttackAnim>();
+        turretSound = GetComponent<TurretSound>();
         _originalScaleXValue = transform.localScale.x;
         turretStat = turretData.RuntimeStat;
     }
@@ -84,7 +89,8 @@ public class TurretArea : TurretBase
             _isAttackWaiting = false;
             yield break;
         }
-        
+
+        turretSound.PlaySoundAttack();
         ApplyDamage(target);
         _isAttackWaiting = false;
     }

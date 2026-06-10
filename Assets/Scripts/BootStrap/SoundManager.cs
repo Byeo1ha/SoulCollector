@@ -42,6 +42,7 @@ public class SoundManager : MonoBehaviour
         bgmSource.clip = clip;
         bgmSource.loop = true;
         bgmSource.Play();
+        Debug.Log("재생했습니다.");
     }
 
     public void StopBGM(float fadeDuration = 1f)

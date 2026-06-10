@@ -7,6 +7,7 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject gameClearPanel;
     [SerializeField] private GameObject pausePanel;
+    [SerializeField] private SFXClick sfxClick;
 
     private bool isPaused;
 
@@ -43,6 +44,7 @@ public class GameUIManager : MonoBehaviour
 
         Time.timeScale = isPaused ? 0f : 1f;
         pausePanel.SetActive(isPaused);
+        sfxClick.PlaySoundClick();
     }
 
     public void ResumeGame()
