@@ -10,17 +10,18 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private float prepareTime = 30f;
     [SerializeField] private int maxStage = 20;
 
-    public int CurrentStage { get; private set; } = 20;
+    public int CurrentStage { get; private set; } = 1;
     public bool IsGameEnded => isGameEnded;
 
     private int aliveEnemyCount;
     private bool isSpawning;
     private Coroutine prepareCoroutine;
     private bool isGameEnded;
+    private bool hasStartedFirstWave;
 
     private void Start()
     {
-        StartWave();
+        StartInitialPrepareTime();
     }
 
     public void RegisterEnemy()
@@ -91,7 +92,11 @@ public class WaveManager : MonoBehaviour
             return;
         }
 
-        CurrentStage++;
+        if (hasStartedFirstWave)
+        {
+            CurrentStage++;
+        }
+
         StartWave();
     }
 
@@ -99,6 +104,8 @@ public class WaveManager : MonoBehaviour
     {
         if (isGameEnded)
             return;
+
+        hasStartedFirstWave = true;
 
         waveUI.UpdateWaveText(CurrentStage, maxStage);
         waveUI.SetWaveState();
@@ -116,6 +123,24 @@ public class WaveManager : MonoBehaviour
             return;
 
         prepareCoroutine = StartCoroutine(PrepareRoutine());
+    }
+
+    private void StartInitialPrepareTime()
+    {
+        waveUI.UpdateWaveText(CurrentStage, maxStage);
+        waveUI.SetBreakState();
+
+        prepareCoroutine = StartCoroutine(InitialPrepareRoutine());
+    }
+
+    private IEnumerator InitialPrepareRoutine()
+    {
+        Debug.Log("정비 시간 시작");
+
+        yield return new WaitForSeconds(prepareTime);
+
+        prepareCoroutine = null;
+        StartWave();
     }
 
     private IEnumerator PrepareRoutine()
