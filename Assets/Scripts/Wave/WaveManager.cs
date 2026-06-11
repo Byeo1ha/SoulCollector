@@ -15,7 +15,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private TurretBuildController turretBuildController;
     [SerializeField] private SFXClick sfxClick;
 
-    public int CurrentStage { get; private set; } = 1;
+    public int CurrentStage { get; private set; } = 10;
     public bool IsGameEnded => isGameEnded;
 
     private AudioSource audioSource;
@@ -56,7 +56,11 @@ public class WaveManager : MonoBehaviour
 
     public void UnregisterEnemy()
 {
+    Debug.Log(
+    $"CurrentStage={CurrentStage}, Alive={aliveEnemyCount}, IsSpawning={isSpawning}"
+    );
     aliveEnemyCount--;
+
 
     if (aliveEnemyCount > 0)
         return;
@@ -66,6 +70,7 @@ public class WaveManager : MonoBehaviour
 
     if (CurrentStage >= maxStage)
     {
+        Debug.Log("GameClear 진입");
         GameClear();
         return;
     }
