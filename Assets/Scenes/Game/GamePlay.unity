@@ -3408,7 +3408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LaserHitEffectPool
   hitEffectPrefab: {fileID: 7355224027158780549, guid: f99965a5eb1e38a4d8e84fa1a98b91c2, type: 3}
-  maxEffects: 10
+  maxEffects: 60
 --- !u!114 &929367282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3422,7 +3422,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AreaHitEffectPool
   hitEffectPrefab: {fileID: 6812716935144181236, guid: 96efb57d89d8ea746a6e129d2e6fb0ad, type: 3}
-  maxEffects: 10
+  maxEffects: 60
 --- !u!114 &929367283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3436,7 +3436,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LaserPool
   laserPrefab: {fileID: 5910704361813408139}
-  maxLasers: 10
+  maxLasers: 60
 --- !u!4 &929367284
 Transform:
   m_ObjectHideFlags: 0
@@ -3465,7 +3465,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SorcererHitEffectPool
   hitEffectPrefab: {fileID: 3796085532541878973, guid: 20455f00b26ab044ab1693b0967543c8, type: 3}
-  maxEffects: 10
+  maxEffects: 60
 --- !u!1 &951244095
 GameObject:
   m_ObjectHideFlags: 0
@@ -4417,7 +4417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 074db1b6b62d8114ab7406d675e420bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CurrencyManager
-  startSoul: 500
+  startSoul: 50000
   soulUI: {fileID: 1678025612}
 --- !u!4 &1192158668
 Transform:
@@ -4917,7 +4917,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 75a734ac338659246bf8fb3d78dd94dc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 070429adf32831e44834948bdcb2d383, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5475,7 +5475,7 @@ MonoBehaviour:
   beamTurretPrefab: {fileID: 2790937876700424134}
   gatlingTurretPrefab: {fileID: 355735479522263313}
   sniperTurretPrefab: {fileID: 7744505201725703302}
-  maxTurrets: 10
+  maxTurrets: 60
 --- !u!114 &1632602130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7104,7 +7104,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 75a734ac338659246bf8fb3d78dd94dc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5866b57a3ddade54dbe18948646dfd48, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
