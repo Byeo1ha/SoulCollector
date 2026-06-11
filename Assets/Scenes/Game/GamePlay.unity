@@ -4417,7 +4417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 074db1b6b62d8114ab7406d675e420bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CurrencyManager
-  startSoul: 50000
+  startSoul: 500
   soulUI: {fileID: 1678025612}
 --- !u!4 &1192158668
 Transform:
