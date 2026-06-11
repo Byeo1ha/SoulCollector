@@ -2224,6 +2224,7 @@ MonoBehaviour:
   clearAudio: {fileID: 8300000, guid: 5f6bdc37f6fad7d4387e511de402ca3d, type: 3}
   failAudio: {fileID: 8300000, guid: 12b054eeea257e2478b2fc75b14c3d04, type: 3}
   turretBuildController: {fileID: 1632602131}
+  sfxClick: {fileID: 0}
 --- !u!4 &435834149
 Transform:
   m_ObjectHideFlags: 0
@@ -5855,7 +5856,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -177.80014, y: 442.59988}
+  m_AnchoredPosition: {x: -183.10818, y: 442.59988}
   m_SizeDelta: {x: 85.367, y: 33.8542}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1677697840
@@ -9168,7 +9169,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -129.59198, y: 503.89124}
+  m_AnchoredPosition: {x: -134.9, y: 503.89124}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!198 &848889483235098451
@@ -22978,7 +22979,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 213.03418, y: 504.85574}
+  m_AnchoredPosition: {x: 218.1, y: 504.85574}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!4 &8084979451189685225
