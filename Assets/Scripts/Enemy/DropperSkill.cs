@@ -7,6 +7,8 @@ public class DropperSkill : MonoBehaviour
     [SerializeField] private float summonInterval = 0.4f;
 
     private EnemyPool ghoulPool;
+    private PlayerBase playerBase;
+    private CurrencyManager currencyManager;
     private WaveManager waveManager;
     private EnemyMovement dropperMovement;
 
@@ -22,10 +24,16 @@ public class DropperSkill : MonoBehaviour
         hasSummoned = false;
     }
 
-    public void Initialize(EnemyPool pool, WaveManager manager)
+    public void Initialize(
+        EnemyPool pool,
+        PlayerBase playerBase,
+        CurrencyManager currencyManager,
+        WaveManager waveManager)
     {
         ghoulPool = pool;
-        waveManager = manager;
+        this.playerBase = playerBase;
+        this.currencyManager = currencyManager;
+        this.waveManager = waveManager;
     }
 
     public void TrySummon(float currentHp, float maxHp)
@@ -33,15 +41,9 @@ public class DropperSkill : MonoBehaviour
         if (hasSummoned)
             return;
 
-        if (ghoulPool == null)
+        if (ghoulPool == null || waveManager == null)
         {
-            Debug.LogWarning("GhoulPool이 없습니다.");
-            return;
-        }
-
-        if (waveManager == null)
-        {
-            Debug.LogWarning("WaveManager가 없습니다.");
+            Debug.LogWarning("DropperSkill 초기화가 완료되지 않았습니다.");
             return;
         }
 
@@ -79,6 +81,7 @@ public class DropperSkill : MonoBehaviour
 
                 if (enemyDie != null)
                 {
+                    enemyDie.Initialize(playerBase, currencyManager, waveManager);
                     enemyDie.SetRewardEnabled(false);
                 }
 
