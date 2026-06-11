@@ -7,6 +7,7 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject gameClearPanel;
     [SerializeField] private GameObject pausePanel;
+    [SerializeField] private PauseBorder pauseBorder;
     [SerializeField] private SFXClick sfxClick;
 
     private bool isPaused;
@@ -23,7 +24,7 @@ public class GameUIManager : MonoBehaviour
 
         gameOverPanel.SetActive(false);
         gameClearPanel.SetActive(false);
-        pausePanel.SetActive(false);
+        //pausePanel.SetActive(false);
     }
 
     public void ShowGameOver()
@@ -40,10 +41,25 @@ public class GameUIManager : MonoBehaviour
 
     public void TogglePause()
     {
+        PausePanelAnim pausePanelAnim = pausePanel.GetComponent<PausePanelAnim>();
+
+        switch (isPaused)
+        {
+            case false:
+                pausePanelAnim.PlayMoveToTargetPos();
+                pauseBorder.HalfFadeOut();
+                break;
+            case true:
+                pausePanelAnim.PlayMoveToOriginalPos();
+                pauseBorder.HalfFadeIn();
+                break;
+        }
+
         isPaused = !isPaused;
 
         Time.timeScale = isPaused ? 0f : 1f;
-        pausePanel.SetActive(isPaused);
+
+        //pausePanel.SetActive(isPaused);
         sfxClick.PlaySoundClick();
     }
 
@@ -51,6 +67,6 @@ public class GameUIManager : MonoBehaviour
     {
         isPaused = false;
         Time.timeScale = 1f;
-        pausePanel.SetActive(false);
+        //pausePanel.SetActive(false);
     }
 }

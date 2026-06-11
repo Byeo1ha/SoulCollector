@@ -6,18 +6,18 @@ public class PauseMenu : MonoBehaviour
 
     private void Start()
     {
-        pausePanel.SetActive(false);
+        //pausePanel.SetActive(false);
     }
 
     public void OpenPause()
     {
-        pausePanel.SetActive(true);
+        //pausePanel.SetActive(true);
         Time.timeScale = 0f;
     }
 
     public void Resume()
     {
-        pausePanel.SetActive(false);
+        //pausePanel.SetActive(false);
         Time.timeScale = 1f;
     }
 }
