@@ -13,6 +13,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private AudioClip clearAudio;
     [SerializeField] private AudioClip failAudio;
     [SerializeField] private TurretBuildController turretBuildController;
+    [SerializeField] private SFXClick sfxClick;
 
     public int CurrentStage { get; private set; } = 1;
     public bool IsGameEnded => isGameEnded;
@@ -125,6 +126,8 @@ public class WaveManager : MonoBehaviour
         {
             CurrentStage++;
         }
+
+        sfxClick.PlaySoundClick();
 
         StartWave();
     }

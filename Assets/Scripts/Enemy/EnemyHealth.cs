@@ -35,6 +35,9 @@ public class EnemyHealth : MonoBehaviour
     if (damage <= 0f)
         return;
 
+    if (enemyDie.IsDead)
+        return;
+
     currentHp -= damage;
 
     if (dropperSkill != null)

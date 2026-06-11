@@ -22,6 +22,8 @@ public class EnemyDie : MonoBehaviour
     private bool isDead;
     private bool rewardEnabled = true;
 
+    public bool IsDead => isDead;
+
     private const int EnemyDieLayer = 10;
 
     private static readonly int DieHash = Animator.StringToHash("Die");
