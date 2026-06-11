@@ -2224,7 +2224,7 @@ MonoBehaviour:
   clearAudio: {fileID: 8300000, guid: 5f6bdc37f6fad7d4387e511de402ca3d, type: 3}
   failAudio: {fileID: 8300000, guid: 12b054eeea257e2478b2fc75b14c3d04, type: 3}
   turretBuildController: {fileID: 1632602131}
-  sfxClick: {fileID: 0}
+  sfxClick: {fileID: 73278548}
 --- !u!4 &435834149
 Transform:
   m_ObjectHideFlags: 0
