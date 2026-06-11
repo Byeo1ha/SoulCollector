@@ -15,7 +15,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private TurretBuildController turretBuildController;
     [SerializeField] private SFXClick sfxClick;
 
-    public int CurrentStage { get; private set; } = 1;
+    public int CurrentStage { get; private set; } = 19;
     public bool IsGameEnded => isGameEnded;
 
     private AudioSource audioSource;
@@ -55,48 +55,54 @@ public class WaveManager : MonoBehaviour
     }
 
     public void UnregisterEnemy()
-{
-    Debug.Log(
-    $"CurrentStage={CurrentStage}, Alive={aliveEnemyCount}, IsSpawning={isSpawning}"
-    );
-    aliveEnemyCount--;
-
-
-    if (aliveEnemyCount > 0)
-        return;
-
-    if (isSpawning)
-        return;
-
-    if (CurrentStage >= maxStage)
     {
-        Debug.Log("GameClear 진입");
-        GameClear();
-        return;
+        aliveEnemyCount--;
+
+        Debug.Log(
+            $"CurrentStage={CurrentStage}, Alive={aliveEnemyCount}, IsSpawning={isSpawning}, IsGameEnded={isGameEnded}"
+        );
+
+        if (isGameEnded)
+            return;
+
+        if (aliveEnemyCount > 0)
+            return;
+
+        if (isSpawning)
+            return;
+
+        if (CurrentStage >= maxStage)
+        {
+            Debug.Log("GameClear 진입");
+            GameClear();
+            return;
+        }
+
+        PlaySound("Clear");
+        StartPrepareTime();
     }
-    
-    PlaySound("Clear");
-    StartPrepareTime();
-}
 
     public void SetSpawningState(bool value)
-{
-    isSpawning = value;
-
-    if (isSpawning)
-        return;
-
-    if (aliveEnemyCount > 0)
-        return;
-
-    if (CurrentStage >= maxStage)
     {
-        GameClear();
-        return;
-    }
+        isSpawning = value;
 
-    StartPrepareTime();
-}
+        if (IsGameEnded)
+            return;
+
+        if (isSpawning)
+            return;
+
+        if (aliveEnemyCount > 0)
+            return;
+
+        if (CurrentStage >= maxStage)
+        {
+            GameClear();
+            return;
+        }
+
+        StartPrepareTime();
+    }
 
     public void EndGame()
     {
