@@ -1141,6 +1141,7 @@ MonoBehaviour:
   pauseBorder: {fileID: 224543323}
   sfxClick: {fileID: 73278548}
   gameOverAnim: {fileID: 1494825424}
+  gameClearAnim: {fileID: 1494825426}
   blackBorder: {fileID: 224543323}
   turretBuildController: {fileID: 1632602131}
 --- !u!4 &114655164
@@ -4511,7 +4512,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LaserHitEffectPool
   hitEffectPrefab: {fileID: 7355224027158780549, guid: f99965a5eb1e38a4d8e84fa1a98b91c2, type: 3}
-  maxEffects: 10
+  maxEffects: 60
 --- !u!114 &929367282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4525,7 +4526,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AreaHitEffectPool
   hitEffectPrefab: {fileID: 6812716935144181236, guid: 96efb57d89d8ea746a6e129d2e6fb0ad, type: 3}
-  maxEffects: 10
+  maxEffects: 60
 --- !u!114 &929367283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4539,7 +4540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LaserPool
   laserPrefab: {fileID: 5910704361813408139}
-  maxLasers: 10
+  maxLasers: 60
 --- !u!4 &929367284
 Transform:
   m_ObjectHideFlags: 0
@@ -4568,7 +4569,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SorcererHitEffectPool
   hitEffectPrefab: {fileID: 3796085532541878973, guid: 20455f00b26ab044ab1693b0967543c8, type: 3}
-  maxEffects: 10
+  maxEffects: 60
 --- !u!1 &951244095
 GameObject:
   m_ObjectHideFlags: 0
@@ -6506,6 +6507,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1494825425}
   - component: {fileID: 1494825424}
+  - component: {fileID: 1494825426}
   m_Layer: 0
   m_Name: UIAnimation
   m_TagString: Untagged
@@ -6543,6 +6545,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1494825426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1494825423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcce49dc785b2aa4089441e971aaa9f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameClearAnim
+  gameClearPanel: {fileID: 15669786}
+  gameClearBtn: {fileID: 273517386}
+  gameClearText: {fileID: 2034719790}
 --- !u!1 &1516304964
 GameObject:
   m_ObjectHideFlags: 0
@@ -7178,7 +7195,7 @@ MonoBehaviour:
   beamTurretPrefab: {fileID: 2790937876700424134}
   gatlingTurretPrefab: {fileID: 355735479522263313}
   sniperTurretPrefab: {fileID: 7744505201725703302}
-  maxTurrets: 10
+  maxTurrets: 60
 --- !u!114 &1632602130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9237,7 +9254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6a2b21988a29ff499dc3fdb9e70ddd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerBase
-  maxHp: 1
+  maxHp: 1000
   baseHpUI: {fileID: 1156095497}
   waveManager: {fileID: 435834148}
   gameUIManager: {fileID: 114655163}
