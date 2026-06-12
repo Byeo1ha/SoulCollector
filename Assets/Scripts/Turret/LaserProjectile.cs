@@ -26,11 +26,6 @@ public class LaserProjectile : MonoBehaviour
         TryDamage(collision);
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        TryDamage(collision);
-    }
-
     public void SetDamage(float damage)
     {
         this.damage = damage;
