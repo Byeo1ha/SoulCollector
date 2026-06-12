@@ -2,60 +2,59 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PauseBorder : MonoBehaviour
+public class PlayerDamageBorder : MonoBehaviour
 {
-    [SerializeField] private Image fadeScreen;
+    [SerializeField] private Image hurtScreen;
 
     private Coroutine fadeCoroutine;
 
     private void Start()
     {
-        fadeScreen.gameObject.SetActive(false);
+        hurtScreen.gameObject.SetActive(false);
     }
 
-    public void HalfFadeIn()
+    public void StartDamage()
     {
-        StartFade(CFadeIn(0.5f, 0f));
+        StartCoroutine(CStartDamage());
     }
 
-    public void HalfFadeOut()
-    {
-        StartFade(CFadeOut(0f, 0.5f));
-    }
-
-    private void StartFade(IEnumerator fade)
+    private IEnumerator CStartDamage()
     {
         if (fadeCoroutine != null)
             StopCoroutine(fadeCoroutine);
+        
+        fadeCoroutine = StartCoroutine(CFadeOut(0f, 0.1f));
 
-        fadeCoroutine = StartCoroutine(fade);
+        yield return fadeCoroutine;
+
+        fadeCoroutine = StartCoroutine(CFadeIn(0.1f, 0f));
     }
 
     private IEnumerator CFadeIn(float startAlpha, float endAlpha)
     {
-        fadeScreen.color = new Color(0f, 0f, 0f, startAlpha);
-        fadeScreen.gameObject.SetActive(true);
+        hurtScreen.color = new Color(1f, 0f, 0f, startAlpha);
+        hurtScreen.gameObject.SetActive(true);
         float alpha = startAlpha;
         while (alpha > endAlpha)
         {
             alpha -= 0.02f;
             yield return new WaitForSecondsRealtime(0.01f);
-            fadeScreen.color = new Color(0f, 0f, 0f, alpha);
+            hurtScreen.color = new Color(1f, 0f, 0f, alpha);
         }
-        fadeScreen.gameObject.SetActive(false);
+        hurtScreen.gameObject.SetActive(false);
         fadeCoroutine = null;
     }
 
     private IEnumerator CFadeOut(float startAlpha, float endAlpha)
     {
-        fadeScreen.color = new Color(0f, 0f, 0f, startAlpha);
-        fadeScreen.gameObject.SetActive(true);
+        hurtScreen.color = new Color(1f, 0f, 0f, startAlpha);
+        hurtScreen.gameObject.SetActive(true);
         float alpha = startAlpha;
         while (alpha < endAlpha)
         {
             alpha += 0.02f;
             yield return new WaitForSecondsRealtime(0.01f);
-            fadeScreen.color = new Color(0f, 0f, 0f, alpha);
+            hurtScreen.color = new Color(1f, 0f, 0f, alpha);
         }
         fadeCoroutine = null;
     }

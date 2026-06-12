@@ -7,6 +7,7 @@ public class PlayerBase : MonoBehaviour
 
     [SerializeField] private WaveManager waveManager;
     [SerializeField] private GameUIManager gameUIManager;
+    [SerializeField] private PlayerDamageBorder playerDamageBorder;
 
     private AudioSource audioSource;
 
@@ -29,6 +30,7 @@ public class PlayerBase : MonoBehaviour
             return;
 
         audioSource.Play();
+        playerDamageBorder.StartDamage();
         CurrentHp -= damage;
         CurrentHp = Mathf.Max(CurrentHp, 0f);
 

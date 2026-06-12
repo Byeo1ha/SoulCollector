@@ -7,8 +7,11 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject gameClearPanel;
     [SerializeField] private GameObject pausePanel;
-    [SerializeField] private PauseBorder pauseBorder;
+    [SerializeField] private BlackBorder pauseBorder;
     [SerializeField] private SFXClick sfxClick;
+    [SerializeField] private GameOverAnim gameOverAnim;
+    [SerializeField] private BlackBorder blackBorder;
+    [SerializeField] private TurretBuildController turretBuildController;
 
     private bool isPaused;
 
@@ -29,8 +32,12 @@ public class GameUIManager : MonoBehaviour
 
     public void ShowGameOver()
     {
+        if (turretBuildController.isBuild) turretBuildController.BuildToggle();
+        
         Time.timeScale = 0f;
         gameOverPanel.SetActive(true);
+        gameOverAnim.StartGameOverAnim();
+        blackBorder.HalfFadeOut();
     }
 
     public void ShowGameClear()

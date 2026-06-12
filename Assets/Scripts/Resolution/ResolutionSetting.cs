@@ -63,7 +63,7 @@ public class ResolutionSetting : MonoBehaviour
         Screen.SetResolution(
             resolution.x,
             resolution.y,
-            FullScreenMode.FullScreenWindow
+            FullScreenMode.ExclusiveFullScreen
         );
     }
 }
