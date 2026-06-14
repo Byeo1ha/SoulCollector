@@ -1,7 +1,6 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class BootStrapManager : MonoBehaviour
 {
@@ -19,7 +18,7 @@ public class BootStrapManager : MonoBehaviour
 
     private IEnumerator StartBootStrap()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.8f);
 
         bool success = BootStrap();
 
@@ -56,13 +55,6 @@ public class BootStrapManager : MonoBehaviour
         if (SceneLoadManager.Instance == null) 
         {
             Debug.Log("SceneLoadManager 누락 감지.");
-            return false;
-        }
-
-        ResolutionLock resolutionLock = FindFirstObjectByType<ResolutionLock>();
-        if (resolutionLock == null) 
-        {
-            Debug.Log("ResolutionLock 누락 감지.");
             return false;
         }
 

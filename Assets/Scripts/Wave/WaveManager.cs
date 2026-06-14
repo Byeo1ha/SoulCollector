@@ -13,6 +13,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private AudioClip clearAudio;
     [SerializeField] private AudioClip failAudio;
     [SerializeField] private TurretBuildController turretBuildController;
+    [SerializeField] private SFXClick sfxClick;
 
     public int CurrentStage { get; private set; } = 1;
     public bool IsGameEnded => isGameEnded;
@@ -54,43 +55,54 @@ public class WaveManager : MonoBehaviour
     }
 
     public void UnregisterEnemy()
-{
-    aliveEnemyCount--;
-
-    if (aliveEnemyCount > 0)
-        return;
-
-    if (isSpawning)
-        return;
-
-    if (CurrentStage >= maxStage)
     {
-        GameClear();
-        return;
+        aliveEnemyCount--;
+
+        Debug.Log(
+            $"CurrentStage={CurrentStage}, Alive={aliveEnemyCount}, IsSpawning={isSpawning}, IsGameEnded={isGameEnded}"
+        );
+
+        if (isGameEnded)
+            return;
+
+        if (aliveEnemyCount > 0)
+            return;
+
+        if (isSpawning)
+            return;
+
+        if (CurrentStage >= maxStage)
+        {
+            Debug.Log("GameClear 진입");
+            GameClear();
+            return;
+        }
+
+        PlaySound("Clear");
+        StartPrepareTime();
     }
-    
-    PlaySound("Clear");
-    StartPrepareTime();
-}
 
     public void SetSpawningState(bool value)
-{
-    isSpawning = value;
-
-    if (isSpawning)
-        return;
-
-    if (aliveEnemyCount > 0)
-        return;
-
-    if (CurrentStage >= maxStage)
     {
-        GameClear();
-        return;
-    }
+        isSpawning = value;
 
-    StartPrepareTime();
-}
+        if (IsGameEnded)
+            return;
+
+        if (isSpawning)
+            return;
+
+        if (aliveEnemyCount > 0)
+            return;
+
+        if (CurrentStage >= maxStage)
+        {
+            GameClear();
+            return;
+        }
+
+        StartPrepareTime();
+    }
 
     public void EndGame()
     {
@@ -125,6 +137,8 @@ public class WaveManager : MonoBehaviour
         {
             CurrentStage++;
         }
+
+        sfxClick.PlaySoundClick();
 
         StartWave();
     }

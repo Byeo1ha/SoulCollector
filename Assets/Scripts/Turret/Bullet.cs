@@ -3,6 +3,8 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private Transform _target;
+    private EnemyDie _targetEnemyDie;
+
     [SerializeField] private float _shootingSpeed;
     [SerializeField] private float _damage;
     [SerializeField] private SorcererHitEffectPool hitEffectPool;
@@ -17,7 +19,7 @@ public class Bullet : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_target == null || !_target.gameObject.activeInHierarchy)
+        if (_target == null || !_target.gameObject.activeInHierarchy || IsTargetDead())
         {
             ReturnToPool();
             return;
@@ -31,6 +33,7 @@ public class Bullet : MonoBehaviour
     {
         transform.localScale = _originalLocalScale;
         _target = null;
+        _targetEnemyDie = null;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -55,6 +58,7 @@ public class Bullet : MonoBehaviour
         if (target == null) return;
 
         _target = target;
+        _targetEnemyDie = target.GetComponent<EnemyDie>();
         _shootingSpeed = shootingSpeed;
         transform.localScale = _originalLocalScale;
         UpdateScaleByMoveDirection();
@@ -106,6 +110,12 @@ public class Bullet : MonoBehaviour
 
         transform.localScale = _originalLocalScale;
         _target = null;
+        _targetEnemyDie = null;
         gameObject.SetActive(false);
+    }
+
+    private bool IsTargetDead()
+    {
+        return _targetEnemyDie != null && _targetEnemyDie.IsDead;
     }
 }

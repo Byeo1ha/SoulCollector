@@ -21,6 +21,9 @@ public abstract class TurretBase : MonoBehaviour
         if (target == null) return false;
         if (!target.gameObject.activeInHierarchy) return false;
 
+        EnemyDie enemyDie = target.GetComponent<EnemyDie>();
+        if (enemyDie != null && enemyDie.IsDead) return false;
+
         float distance = ((Vector2)target.position - origin).sqrMagnitude;
         return distance <= attackRanage * attackRanage;
     }

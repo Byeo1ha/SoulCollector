@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 470a171886b64b6480160d9b3804c89d, type: 3}
   m_Name: DarkSorcererData
   m_EditorClassIdentifier: Assembly-CSharp::TurretData
-  cost: 40
+  cost: 90
   attackDamage: 20
   attackRange: 5
   cooldown: 1

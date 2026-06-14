@@ -66,7 +66,11 @@ public class WaveSpawner : MonoBehaviour
 
         if (dropperSkill != null)
         {
-            dropperSkill.Initialize(ghoulPool, waveManager);
+            dropperSkill.Initialize(
+        ghoulPool,
+        playerBase,
+        currencyManager,
+        waveManager);
         }
 
         waveManager.RegisterEnemy();
