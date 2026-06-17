@@ -1393,6 +1393,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TitleBtn
   nextSceneName: GamePlay
+  hoverButtons:
+  - button: {fileID: 1223621718}
+    targetImage: {fileID: 580326706}
+    hoverSprite: {fileID: 21300000, guid: 832986fa941f8ef47bc3e21dba33eb63, type: 3}
+  - button: {fileID: 1175071301}
+    targetImage: {fileID: 1534172525}
+    hoverSprite: {fileID: 21300000, guid: c451da7fd6bb2a1478dfb4a29ebbdc61, type: 3}
+  - button: {fileID: 671322286}
+    targetImage: {fileID: 232295042}
+    hoverSprite: {fileID: 21300000, guid: ae40a8e1fa3b2e6429ccb3d2555ccf0c, type: 3}
 --- !u!1 &1458643796
 GameObject:
   m_ObjectHideFlags: 0
