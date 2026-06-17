@@ -1,24 +1,22 @@
 using System.Collections;
-using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BootStrapManager : MonoBehaviour
 {
     [SerializeField] private string nextSceneName = "TitleScreen";
-    [SerializeField] private GameObject targetObj;
-    [SerializeField] private TMP_Text loadingText;
 
     private Coroutine LoadingText;
 
     private void Start()
     {
         StartCoroutine(StartBootStrap());
-        LoadingText = StartCoroutine(StartLoadingText());
+        //LoadingText = StartCoroutine(StartLoadingText());
     }
 
     private IEnumerator StartBootStrap()
     {
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(0.5f);
 
         bool success = BootStrap();
 
@@ -37,11 +35,10 @@ public class BootStrapManager : MonoBehaviour
             LoadingText = null;
         }
 
-        DeActiveLoadingObj();
+        //DeActiveLoadingObj();
         yield return new WaitForSeconds(0.2f);
-        //페이드 아웃 연출은 어색해서 비동기 로드로 대체.
-        //SceneManager.LoadScene(nextSceneName); << 완성되면 이 코드로 바꿀 것.
-        SceneLoadManager.Instance.LoadSceneWithLoading(nextSceneName, 2f);
+        
+        SceneManager.LoadScene(nextSceneName);
     }
 
     private bool BootStrap()
@@ -61,7 +58,7 @@ public class BootStrapManager : MonoBehaviour
         //성공적으로 마치셨어요!
         return true;
     }
-
+/*
 // -------------------연출용------------------- //
     private IEnumerator StartLoadingText()
     {
@@ -83,4 +80,5 @@ public class BootStrapManager : MonoBehaviour
         targetObj.SetActive(false);
         loadingText.gameObject.SetActive(false);
     }
+    */
 }
