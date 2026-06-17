@@ -16,7 +16,7 @@ public class BootStrapManager : MonoBehaviour
 
     private IEnumerator StartBootStrap()
     {
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(0.5f);
 
         bool success = BootStrap();
 
