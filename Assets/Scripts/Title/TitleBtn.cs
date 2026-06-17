@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class TitleBtn : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private string nextSceneName = "GamePlay";
+
+    public void GameStartBtn()
     {
-        
+        SceneLoadManager.Instance.LoadScene(nextSceneName);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void GameQuitBtn()
     {
-        
+        Application.Quit();
     }
 }
